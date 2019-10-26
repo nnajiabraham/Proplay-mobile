@@ -1,5 +1,5 @@
-import Discover from './Discover';
+import Home from './Home';
 import Search from './Search';
 import Profile from './Profile';
 
-export {Discover, Search, Profile};
+export {Home, Search, Profile};

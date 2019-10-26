@@ -1,14 +1,14 @@
 import React from 'react';
 import {View, Text, SafeAreaView} from 'react-native';
 
-const Discover = () => {
+const Home = () => {
   return (
     <>
       <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-        <Text>Discover Page</Text>
+        <Text>Home Page</Text>
       </View>
     </>
   );
 };
 
-export default Discover;
+export default Home;
