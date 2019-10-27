@@ -1,6 +1,11 @@
 import React from 'react';
-import {StatusBar} from 'react-native';
-import {Home, Search, Profile} from './src/screens';
+import {
+  StyleSheet,
+  Platform,
+  StatusBar,
+  SafeAreaView,
+  YellowBox,
+} from 'react-native';
 import {
   createAppContainer,
   NavigationTabRouterConfig,
@@ -17,18 +22,20 @@ import {
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {IconProps} from 'react-native-vector-icons/Icon';
 
+import {Home, Search, Profile} from './src';
+
 type IMaterialTabOptions = NavigationTabRouterConfig &
   NavigationMaterialBottomTabConfig;
 
-const TabIcon = ({name, color}: IconProps) => {
+const TabIcon = ({name, color = '#fff'}: IconProps) => {
   return <Icon name={name} color={color} size={20} />;
 };
 
 const tabRouteOptions: IMaterialTabOptions = {
   initialRouteName: 'Home',
-  activeColor: '#000',
-  inactiveColor: 'rgba(0, 0, 0, 0.6)',
-  barStyle: {backgroundColor: '#fff'},
+  activeColor: '#fff',
+  inactiveColor: 'rgba(255, 255, 255, 0.6)',
+  barStyle: {backgroundColor: 'transparent'},
 };
 
 const HomeStack = createMaterialBottomTabNavigator(
@@ -73,12 +80,12 @@ const AppStack = createStackNavigator(
 const AppContainer = createAppContainer(AppStack);
 
 const App: React.FC = () => {
+  YellowBox.ignoreWarnings(['Warning: componentWillReceiveProps']);
+
   return (
     <>
-      <StatusBar barStyle="dark-content" />
       <AppContainer />
     </>
   );
 };
-
 export default App;
