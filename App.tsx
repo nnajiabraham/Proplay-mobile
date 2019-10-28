@@ -5,19 +5,15 @@ import {
   StatusBar,
   SafeAreaView,
   YellowBox,
+  Text,
 } from 'react-native';
-import {
-  createAppContainer,
-  NavigationTabRouterConfig,
-  NavigationScreenComponent,
-  NavigationRouteConfigMap,
-  NavigationScreenConfig,
-} from 'react-navigation';
+import {createAppContainer, NavigationTabRouterConfig} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 import {createBottomTabNavigator} from 'react-navigation-tabs';
 import {
   createMaterialBottomTabNavigator,
   NavigationMaterialBottomTabConfig,
+  NavigationMaterialBottomTabOptions,
 } from 'react-navigation-material-bottom-tabs';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {IconProps} from 'react-native-vector-icons/Icon';
@@ -27,14 +23,14 @@ import {Home, Search, Profile} from './src';
 type IMaterialTabOptions = NavigationTabRouterConfig &
   NavigationMaterialBottomTabConfig;
 
-const TabIcon = ({name, color = '#fff'}: IconProps) => {
+const TabIcon = ({name, color}: IconProps) => {
   return <Icon name={name} color={color} size={20} />;
 };
 
-const tabRouteOptions: IMaterialTabOptions = {
+let tabRouteOptions: IMaterialTabOptions = {
   initialRouteName: 'Home',
-  activeColor: '#fff',
-  inactiveColor: 'rgba(255, 255, 255, 0.6)',
+  activeColor: '#000',
+  inactiveColor: 'rgba(0, 0, 0, 0.6)',
   barStyle: {backgroundColor: 'transparent'},
 };
 
@@ -42,20 +38,38 @@ const HomeStack = createMaterialBottomTabNavigator(
   {
     Home: {
       screen: Home,
-      navigationOptions: {
-        tabBarIcon: TabIcon({name: 'home'}),
+      navigationOptions: ({navigation, index}: any) => {
+        const color = navigation.isFocused() ? '#fff' : 'rgba(0,0,0,0.6)';
+
+        return {
+          tabBarIcon: TabIcon({name: 'home', color: color}),
+          tabBarLabel: <Text style={{color: color}}>Home</Text>,
+          tabBarColor: '#fff',
+        };
       },
     },
     Search: {
       screen: Search,
-      navigationOptions: {
-        tabBarIcon: TabIcon({name: 'search'}),
+      navigationOptions: ({navigation}) => {
+        const color = navigation.isFocused() ? '#000' : 'rgba(0,0,0,0.6)';
+
+        return {
+          tabBarIcon: TabIcon({name: 'search', color: color}),
+          tabBarLabel: <Text style={{color: color}}>Search</Text>,
+          tabBarColor: '#fff',
+        };
       },
     },
     Profile: {
       screen: Profile,
-      navigationOptions: {
-        tabBarIcon: TabIcon({name: 'person'}),
+      navigationOptions: ({navigation}) => {
+        const color = navigation.isFocused() ? '#000' : 'rgba(0,0,0,0.6)';
+
+        return {
+          tabBarIcon: TabIcon({name: 'person', color: color}),
+          tabBarLabel: <Text style={{color: color}}>Profile</Text>,
+          tabBarColor: '#fff',
+        };
       },
     },
   },
