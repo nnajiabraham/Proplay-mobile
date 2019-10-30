@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, Text} from 'react-native';
-import SafeViewWrapper from '../components/SafeViewWrapper/SafeViewWrapper';
+import SafeViewWrapper from '../components/SafeViewWrapper';
 
 const Profile = () => {
   return (

@@ -9,17 +9,19 @@ import {
   SafeAreaView,
 } from 'react-native';
 import ContentLoader, {Rect} from 'react-content-loader/native';
-import SafeViewWrapper from '../components/SafeViewWrapper/SafeViewWrapper';
+import SafeViewWrapper from '../components/SafeViewWrapper';
+import VideoFlatList from '../components/VideoFlatList';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
+    height: Dimensions.get('window').height,
+    width: Dimensions.get('screen').width,
   },
-  image: {},
 });
 
-const VideoLoader = () => (
+const VideoLoader: React.FC = () => (
   <ContentLoader
     height={Dimensions.get('window').height}
     width={Dimensions.get('screen').width}
@@ -42,9 +44,9 @@ const VideoLoader = () => (
 const Home = () => {
   return (
     <SafeViewWrapper>
-      <StatusBar animated />
+      {/* <StatusBar barStyle="light-content" /> */}
       <View style={styles.container}>
-        <VideoLoader />
+        <VideoFlatList />
       </View>
     </SafeViewWrapper>
   );

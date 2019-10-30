@@ -5,7 +5,7 @@ import {createStackNavigator} from 'react-navigation-stack';
 import {createBottomTabNavigator} from 'react-navigation-tabs';
 
 import {Home, Search, Profile} from './src';
-import CustomTab from './src/components/CustomTab/CustomTab';
+import CustomTab from './src/components/CustomTab';
 
 const HomeStack = createBottomTabNavigator(
   {
@@ -24,8 +24,7 @@ const HomeStack = createBottomTabNavigator(
     lazy: true,
     tabBarComponent: CustomTab,
     tabBarOptions: {
-      activeTintColor: 'blue',
-      inactiveTintColor: 'grey',
+      // inactiveTintColor: 'rgba(255,255,255,0.6)',
     },
   },
 );
