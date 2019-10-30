@@ -8,23 +8,13 @@ import {
   Dimensions,
   SafeAreaView,
 } from 'react-native';
-import ContentLoader, {
-  Rect,
-  Circle,
-  Code,
-  Instagram,
-} from 'react-content-loader/native';
+import ContentLoader, {Rect} from 'react-content-loader/native';
 import SafeViewWrapper from '../components/SafeViewWrapper/SafeViewWrapper';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    // flex: 1,
-    // resizeMode: 'cover',
-    // ...StyleSheet.absoluteFillObject,
-    // width: null,
-    // height: Dimensions.get('window').height,
   },
   image: {},
 });
@@ -52,6 +42,7 @@ const VideoLoader = () => (
 const Home = () => {
   return (
     <SafeViewWrapper>
+      <StatusBar animated />
       <View style={styles.container}>
         <VideoLoader />
       </View>
