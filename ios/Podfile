@@ -42,6 +42,10 @@ target 'proplay' do
 
   pod 'react-native-video', :path => '../node_modules/react-native-video'
 
+  pod 'react-native-safe-area-context', :path => '../node_modules/react-native-safe-area-context'
+
+  pod 'RNDeviceInfo', :path => '../node_modules/react-native-device-info'
+
   target 'proplayTests' do
     inherit! :search_paths
     # Pods for testing

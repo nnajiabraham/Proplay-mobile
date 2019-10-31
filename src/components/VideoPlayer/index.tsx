@@ -51,7 +51,7 @@ var styles = StyleSheet.create({
   },
   logo: {
     position: 'absolute',
-    paddingTop: 26,
+    marginTop: StatusBar.currentHeight ? 26 : 52, // StatusBar.currentHeight if present has no notch else has notch, double padding
     zIndex: 4,
     alignSelf: 'center',
   },

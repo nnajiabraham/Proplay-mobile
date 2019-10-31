@@ -3,7 +3,7 @@ import {YellowBox} from 'react-native';
 import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 import {createBottomTabNavigator} from 'react-navigation-tabs';
-
+import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {Home, Search, Profile} from './src';
 import CustomTab from './src/components/CustomTab';
 
@@ -50,9 +50,9 @@ const App: React.FC = () => {
   YellowBox.ignoreWarnings(['Warning: componentWillReceiveProps']);
 
   return (
-    <>
+    <SafeAreaProvider>
       <AppContainer />
-    </>
+    </SafeAreaProvider>
   );
 };
 export default App;
