@@ -4,7 +4,7 @@ import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 import {createBottomTabNavigator} from 'react-navigation-tabs';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
-import {Home, Search, Profile} from './src';
+import {Home, Search, Profile, Preference} from './src';
 import CustomTab from './src/components/CustomTab';
 
 const HomeStack = createBottomTabNavigator(
@@ -29,9 +29,14 @@ const HomeStack = createBottomTabNavigator(
   },
 );
 
+// const PreferenceStack = createStackNavigator
+
 const AppStack = createStackNavigator(
   {
     HomeStack: HomeStack,
+    Preference: {
+      screen: Preference,
+    },
     // Search: SearchScreen,
     // Pro: ProProfileScreen,
     // AddPost: ProPostScreen,
@@ -39,7 +44,7 @@ const AppStack = createStackNavigator(
     // Payments: PaymentScreen,
   },
   {
-    initialRouteName: 'HomeStack',
+    initialRouteName: 'Preference',
     headerMode: 'none',
   },
 );
