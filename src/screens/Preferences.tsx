@@ -7,6 +7,8 @@ import {
   SectionList,
   FlatList,
   Dimensions,
+  Platform,
+  StatusBar,
 } from 'react-native';
 import SafeViewWrapper from '../components/SafeViewWrapper';
 import {SportCategories, ISportCategories} from '../api/fetchPreference';
@@ -63,7 +65,7 @@ const Preferences = () => {
     <SafeViewWrapper removeNotch={true}>
       <View style={styles.container}>
         <ScrollView contentContainerStyle={styles.scrollView}>
-          <View>
+          <View style={styles.header}>
             <Header label={'What are you interested in?'} />
             <Text style={styles.subHeading}>
               Pick your favorite interests to find pros and tips that can help
@@ -122,6 +124,10 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     paddingLeft: 20,
     paddingRight: 20,
+  },
+  header: {
+    marginTop: Platform.OS == 'android' ? StatusBar.currentHeight : 0,
+    marginBottom: Platform.OS == 'android' ? StatusBar.currentHeight : 0,
   },
   subHeading: {
     fontSize: 16,
