@@ -17,14 +17,13 @@ export const SportCategories: ISportCategories = [
     ],
   },
   {
-    category: 'Baseball',
+    category: 'Basketball',
     subcategories: [
-      'Pitcher',
-      'First Base',
-      'Quarterback',
-      'Catcher',
-      'Place Kicker',
-      'Secondary',
+      'Point Guard',
+      'Shooting Guard',
+      'Center',
+      'Power Forward',
+      'small Forward',
     ],
   },
   {

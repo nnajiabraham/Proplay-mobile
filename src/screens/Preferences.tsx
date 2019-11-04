@@ -9,43 +9,18 @@ import {
   Dimensions,
   Platform,
   StatusBar,
+  TouchableOpacity,
 } from 'react-native';
+import {useNavigation, useNavigationParam} from 'react-navigation-hooks';
+
 import SafeViewWrapper from '../components/SafeViewWrapper';
 import {SportCategories, ISportCategories} from '../api/fetchPreference';
-import ToggleSelectButton from '../components/ToggleSelectButton';
+import PreferenceCategory from '../components/PreferenceCategory';
 import Header from '../components/Header';
-import {TouchableOpacity} from 'react-native-gesture-handler';
 
-interface ISportCategoriesViewProp {
-  header: string;
-  subcategories: Array<string>;
-  onSelect: (key: string) => void;
-  selected: Array<string>;
-}
+const Preferences: React.FC = () => {
+  const {navigate} = useNavigation();
 
-const PreferenceCategoriesView: React.FC<ISportCategoriesViewProp> = ({
-  header,
-  subcategories,
-  onSelect,
-  selected,
-}) => {
-  return (
-    <>
-      <View>
-        <Header label={header} />
-      </View>
-      <View>
-        <ToggleSelectButton
-          options={subcategories}
-          onSelect={onSelect}
-          selected={selected}
-        />
-      </View>
-    </>
-  );
-};
-
-const Preferences = () => {
   const [selectedPreferenceState, setPreferenceState] = React.useState<
     Array<string>
   >([]);
@@ -73,7 +48,7 @@ const Preferences = () => {
             </Text>
           </View>
           {SportCategories.map(item => (
-            <PreferenceCategoriesView
+            <PreferenceCategory
               key={Math.random()
                 .toString(36)
                 .substring(7)}
@@ -85,7 +60,7 @@ const Preferences = () => {
           ))}
         </ScrollView>
         <View style={styles.skipNowView}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => navigate('Home')}>
             <Text style={styles.skipForNowBtn}>Skip For Now</Text>
           </TouchableOpacity>
           <TouchableOpacity
