@@ -23,7 +23,7 @@ export const SportCategories: ISportCategories = [
       'Shooting Guard',
       'Center',
       'Power Forward',
-      'small Forward',
+      'Small Forward',
     ],
   },
   {

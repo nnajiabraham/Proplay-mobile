@@ -1,63 +1,38 @@
 import React from 'react';
 import {YellowBox} from 'react-native';
-import {createAppContainer} from 'react-navigation';
-import {createStackNavigator} from 'react-navigation-stack';
-import {createBottomTabNavigator} from 'react-navigation-tabs';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
-import {Home, Search, Profile, Preference} from './src';
-import CustomTab from './src/components/CustomTab';
+import {Provider} from 'react-redux';
+import {createStore, compose, applyMiddleware} from 'redux';
 
-const HomeStack = createBottomTabNavigator(
-  {
-    Home: {
-      screen: Home,
-    },
-    Search: {
-      screen: Search,
-    },
-    Profile: {
-      screen: Profile,
-    },
-  },
-  {
-    initialRouteName: 'Home',
-    lazy: true,
-    tabBarComponent: CustomTab,
-    tabBarOptions: {
-      // inactiveTintColor: 'rgba(255,255,255,0.6)',
-    },
-  },
+import AppNavigationContainer from './src/screens';
+import rootReducer from './src/store/reducers';
+
+// import thunk from 'redux-thunk';
+
+// const middleware = [thunk];
+const middleware = [];
+
+// eslint-disable-next-line no-underscore-dangle
+const composeEnhancers =
+  (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+const store = createStore(
+  rootReducer,
+  {},
+  composeEnhancers(applyMiddleware(...middleware)),
 );
-
-// const PreferenceStack = createStackNavigator
-
-const AppStack = createStackNavigator(
-  {
-    HomeStack: HomeStack,
-    Preference: {
-      screen: Preference,
-    },
-    // Search: SearchScreen,
-    // Pro: ProProfileScreen,
-    // AddPost: ProPostScreen,
-    // Video: VideoScreen,
-    // Payments: PaymentScreen,
-  },
-  {
-    initialRouteName: 'Preference',
-    headerMode: 'none',
-  },
-);
-
-const AppContainer = createAppContainer(AppStack);
 
 const App: React.FC = () => {
+  //ignoring an unnecessary warning caused from react-navigation
   YellowBox.ignoreWarnings(['Warning: componentWillReceiveProps']);
+  console.log(store.getState());
 
   return (
-    <SafeAreaProvider>
-      <AppContainer />
-    </SafeAreaProvider>
+    <Provider store={store}>
+      <SafeAreaProvider>
+        <AppNavigationContainer />
+      </SafeAreaProvider>
+    </Provider>
   );
 };
 export default App;
