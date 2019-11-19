@@ -4,9 +4,13 @@ import Video from 'react-native-video';
 import VideoLogoHeader from './VideoLogoHeader';
 const sampleVid = require('../../assets/sampleVid.mp4');
 
-const VideoPlayer = ({url}: any) => {
+export interface IVideoPlayerProps {
+  url: string;
+}
+
+const VideoPlayer: React.FC<IVideoPlayerProps> = ({url}) => {
   const onBuffer = () => {
-    console.log('buffer');
+    // console.log('buffer');
   };
 
   const videoError = e => {
@@ -21,8 +25,7 @@ const VideoPlayer = ({url}: any) => {
         </View>
         <Video
           source={{
-            uri:
-              'https://testingtestingtestingtestingbyabe.s3.amazonaws.com/sampleVid.mp4',
+            uri: url,
           }}
           // source={require('../../assets/sampleVid.mp4')} // Can be a URL or a local file.
           // ref={ref => {
@@ -31,7 +34,7 @@ const VideoPlayer = ({url}: any) => {
           onBuffer={onBuffer}
           onError={videoError}
           style={styles.video}
-          controls={true}
+          controls={false}
           paused={true}
           fullscreen={false}
           resizeMode="cover"

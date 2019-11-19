@@ -23,7 +23,7 @@ const store = createStore(
 );
 
 const App: React.FC = () => {
-  //ignoring an unnecessary warning caused from react-navigation
+  //ignoring an unnecessary componentWillReceiveProps warning caused from react-navigation
   YellowBox.ignoreWarnings(['Warning: componentWillReceiveProps']);
   console.log(store.getState());
 

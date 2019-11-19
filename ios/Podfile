@@ -46,6 +46,8 @@ target 'proplay' do
 
   pod 'RNDeviceInfo', :path => '../node_modules/react-native-device-info'
 
+  pod 'react-native-viewpager', :path => '../node_modules/@react-native-community/viewpager'
+
   target 'proplayTests' do
     inherit! :search_paths
     # Pods for testing
