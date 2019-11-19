@@ -6,9 +6,13 @@ const sampleVid = require('../../assets/sampleVid.mp4');
 
 export interface IVideoPlayerProps {
   url: string;
+  pauseClosedVideo: boolean;
 }
 
-const VideoPlayer: React.FC<IVideoPlayerProps> = ({url}) => {
+const VideoPlayer: React.FC<IVideoPlayerProps> = ({
+  url,
+  pauseClosedVideo = true,
+}) => {
   const onBuffer = () => {
     // console.log('buffer');
   };
@@ -35,9 +39,10 @@ const VideoPlayer: React.FC<IVideoPlayerProps> = ({url}) => {
           onError={videoError}
           style={styles.video}
           controls={false}
-          paused={true}
+          paused={pauseClosedVideo}
           fullscreen={false}
           resizeMode="cover"
+          repeat={true}
         />
       </View>
     </>
