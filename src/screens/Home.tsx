@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    height: Dimensions.get('window').height,
+    height: Dimensions.get('screen').height,
     width: Dimensions.get('screen').width,
   },
 });

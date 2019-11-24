@@ -24,9 +24,9 @@ const VideoPlayer: React.FC<IVideoPlayerProps> = ({
   return (
     <>
       <View style={styles.video}>
-        <View style={styles.logo}>
+        {/* <View style={styles.logo}>
           <VideoLogoHeader />
-        </View>
+        </View> */}
         <Video
           source={{
             uri: url,
@@ -58,10 +58,14 @@ var styles = StyleSheet.create({
     width: Dimensions.get('screen').width,
   },
   logo: {
+    backgroundColor: '#43c43c',
     position: 'absolute',
+    left: 0,
+    top: 0,
     marginTop: StatusBar.currentHeight ? 26 : 52, // StatusBar.currentHeight if present has no notch else has notch, double padding
     zIndex: 4,
     alignSelf: 'center',
+    // left: 40,
   },
 });
 

@@ -31,16 +31,16 @@ const VideoFlatList: React.FC = () => {
         <Text style={{color: '#fff'}}>Loading...</Text>
       </>
     ) : (
-      //component vertical pager not supported for android, a PR is up to fix in github, update library after updated
       <ViewPager
         style={styles.container}
         initialPage={0}
         transitionStyle="scroll"
         orientation="vertical"
+        pageMargin={0}
         onPageSelected={e => {
           setActiveVideoIndex(e.nativeEvent.position);
           console.log('changed\n', e.nativeEvent.position);
-        }} //this will handle paginated fetch to avoid fetching
+        }}
       >
         {/* {[1, 2, 3, 4, 5, 6].map(i => (
           <Text key={i}>{`First page ${i}`}</Text>
@@ -52,6 +52,11 @@ const VideoFlatList: React.FC = () => {
             pauseClosedVideo={!Boolean(activeVideoIndex == index)}
           />
         ))}
+        {/* <VideoPlayer
+          key={videoList[0].id}
+          url={videoList[0].url}
+          pauseClosedVideo={!Boolean(activeVideoIndex == 0)}
+        /> */}
       </ViewPager>
     );
   };
