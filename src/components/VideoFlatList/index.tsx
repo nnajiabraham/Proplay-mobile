@@ -1,17 +1,9 @@
 import React, {Component} from 'react';
-import {
-  FlatList,
-  StyleSheet,
-  View,
-  Dimensions,
-  StatusBar,
-  Text,
-} from 'react-native';
+import {StyleSheet, View, Dimensions, StatusBar, Text} from 'react-native';
 import VideoPlayer from '../VideoPlayer';
 import ViewPager from '@react-native-community/viewpager';
 import {fetchVideo, IVideoFetchResponse} from '../../api/fetchVideo';
-import ContentLoader from 'react-content-loader/native/native';
-import {Rect} from 'react-native-svg';
+import VideoLogoHeader from '../VideoPlayer/VideoLogoHeader';
 
 const VideoFlatList: React.FC = () => {
   const [videoList, setVideoList] = React.useState<Array<IVideoFetchResponse>>(
@@ -42,9 +34,6 @@ const VideoFlatList: React.FC = () => {
           console.log('changed\n', e.nativeEvent.position);
         }}
       >
-        {/* {[1, 2, 3, 4, 5, 6].map(i => (
-          <Text key={i}>{`First page ${i}`}</Text>
-        ))} */}
         {videoList.map((vid, index) => (
           <VideoPlayer
             key={vid.id}
@@ -52,25 +41,30 @@ const VideoFlatList: React.FC = () => {
             pauseClosedVideo={!Boolean(activeVideoIndex == index)}
           />
         ))}
-        {/* <VideoPlayer
-          key={videoList[0].id}
-          url={videoList[0].url}
-          pauseClosedVideo={!Boolean(activeVideoIndex == 0)}
-        /> */}
       </ViewPager>
     );
   };
 
   return (
     <>
-      <View style={styles.container}>{renderItems()}</View>
+      <View style={styles.container}>
+        <View style={styles.logo}>
+          <VideoLogoHeader />
+        </View>
+        {renderItems()}
+      </View>
     </>
   );
 };
 
 const styles = StyleSheet.create({
+  logo: {
+    position: 'absolute',
+    top: 0,
+    zIndex: 4,
+    marginTop: StatusBar.currentHeight ? 26 : 52, // StatusBar.currentHeight if present has no notch else has notch, double padding
+  },
   container: {
-    // backgroundColor: '#000',
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
