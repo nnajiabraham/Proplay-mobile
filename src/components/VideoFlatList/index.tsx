@@ -4,24 +4,29 @@ import VideoPlayer from '../VideoPlayer';
 import ViewPager from '@react-native-community/viewpager';
 import {fetchVideo, IVideoFetchResponse} from '../../api/fetchVideo';
 import VideoLogoHeader from '../VideoPlayer/VideoLogoHeader';
+import {useFocusState} from 'react-navigation-hooks';
 
 const VideoFlatList: React.FC = () => {
   const [videoList, setVideoList] = React.useState<Array<IVideoFetchResponse>>(
     [],
   );
   const [activeVideoIndex, setActiveVideoIndex] = React.useState(0);
+  const {isFocused} = useFocusState();
 
   React.useEffect(() => {
-    // setVideoList([]);
     setVideoList(fetchVideo());
   }, []);
 
   const renderItems = () => {
     return videoList.length == 0 ? (
       //TODO: change to a better loading component
-      <>
-        <Text style={{color: '#fff'}}>Loading...</Text>
-      </>
+      <Text
+        style={{
+          color: '#fff',
+        }}
+      >
+        Loading...
+      </Text>
     ) : (
       <ViewPager
         style={styles.container}
@@ -38,7 +43,9 @@ const VideoFlatList: React.FC = () => {
           <VideoPlayer
             key={vid.id}
             url={vid.url}
-            pauseClosedVideo={!Boolean(activeVideoIndex == index)}
+            pauseClosedVideo={
+              isFocused ? !Boolean(activeVideoIndex == index) : true
+            }
           />
         ))}
       </ViewPager>

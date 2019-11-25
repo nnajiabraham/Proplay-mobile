@@ -7,8 +7,6 @@ import {
   Platform,
   Dimensions,
 } from 'react-native';
-import ContentLoader, {Rect} from 'react-content-loader/native';
-import SafeAreaView from 'react-native-safe-area-view';
 import SafeViewWrapper from '../components/SafeViewWrapper';
 import VideoFlatList from '../components/VideoFlatList';
 

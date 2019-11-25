@@ -25,7 +25,6 @@ const VideoPlayer: React.FC<IVideoPlayerProps> = ({
         source={{
           uri: url,
         }}
-        // source={require('../../assets/sampleVid.mp4')} // Can be a URL or a local file.
         // ref={ref => {
         //   videoRef.current = ref;
         // }} // Store reference
