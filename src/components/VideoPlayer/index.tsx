@@ -11,6 +11,12 @@ const VideoPlayer: React.FC<IVideoPlayerProps> = ({
   url,
   pauseClosedVideo = true,
 }) => {
+  const vidRef = React.useRef(null);
+
+  // React.useEffect(() => {
+  //   console.log(vidRef);
+  // }, []);
+
   const onBuffer = () => {
     // console.log('buffer');
   };
@@ -25,9 +31,7 @@ const VideoPlayer: React.FC<IVideoPlayerProps> = ({
         source={{
           uri: url,
         }}
-        // ref={ref => {
-        //   videoRef.current = ref;
-        // }} // Store reference
+        ref={vidRef}
         onBuffer={onBuffer}
         onError={videoError}
         style={styles.video}
@@ -36,6 +40,7 @@ const VideoPlayer: React.FC<IVideoPlayerProps> = ({
         fullscreen={false}
         resizeMode="cover"
         repeat={true}
+        onLoad={payload => console.log(payload)} //with vidRef.current.seek can reset vid timeline on change
       />
     </View>
   );
