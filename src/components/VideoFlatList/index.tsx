@@ -43,9 +43,7 @@ const VideoFlatList: React.FC = () => {
           <VideoPlayer
             key={vid.id}
             url={vid.url}
-            pauseClosedVideo={
-              isFocused ? !Boolean(activeVideoIndex == index) : true
-            }
+            videoClosed={isFocused ? !Boolean(activeVideoIndex == index) : true}
           />
         ))}
       </ViewPager>

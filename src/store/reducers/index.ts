@@ -1,8 +1,8 @@
-import firstNamedReducer from './reducers';
+import preferences from './preferences';
 import {combineReducers} from 'redux';
 
 const rootReducer = combineReducers({
-  firstNamedReducer,
+  preferences,
 });
 
 export default rootReducer;

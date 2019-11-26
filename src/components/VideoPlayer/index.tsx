@@ -1,21 +1,21 @@
 import React from 'react';
 import {View, StyleSheet, Text, Dimensions} from 'react-native';
-import Video from 'react-native-video';
+import Video, {OnLoadData} from 'react-native-video';
+import {useFocusState} from 'react-navigation-hooks';
 
 export interface IVideoPlayerProps {
   url: string;
-  pauseClosedVideo: boolean;
+  videoClosed: boolean;
+  seekPosition?: number;
 }
 
 const VideoPlayer: React.FC<IVideoPlayerProps> = ({
   url,
-  pauseClosedVideo = true,
+  videoClosed = true,
+  seekPosition,
 }) => {
-  const vidRef = React.useRef(null);
-
-  // React.useEffect(() => {
-  //   console.log(vidRef);
-  // }, []);
+  const [videoLoaded, setVideoLoaded] = React.useState<boolean>(false);
+  const player = React.useRef(null);
 
   const onBuffer = () => {
     // console.log('buffer');
@@ -25,22 +25,38 @@ const VideoPlayer: React.FC<IVideoPlayerProps> = ({
     console.log('Error', e);
   };
 
+  const onVideoLoad = () => (e: OnLoadData) => {
+    setVideoLoaded(true);
+  };
+
+  const seekVideoToPosition = (position: number) => {
+    player.current.seek(position);
+  };
+
+  React.useEffect(() => {
+    //seek can only be run after video is loaded
+    //run every time video is closed/swiped away so that when reopened we restart to seek position
+    if (videoLoaded) {
+      seekPosition ? seekVideoToPosition(seekPosition) : seekVideoToPosition(0);
+    }
+  }, [videoClosed, videoLoaded]);
+
   return (
     <View style={styles.container}>
       <Video
         source={{
           uri: url,
         }}
-        ref={vidRef}
+        ref={player}
         onBuffer={onBuffer}
         onError={videoError}
         style={styles.video}
         controls={false}
-        paused={pauseClosedVideo}
+        paused={videoClosed}
         fullscreen={false}
         resizeMode="cover"
-        repeat={true}
-        onLoad={payload => console.log(payload)} //with vidRef.current.seek can reset vid timeline on change
+        repeat={false}
+        onLoad={onVideoLoad()} //with vidRef.current.seek can reset vid timeline on change
       />
     </View>
   );

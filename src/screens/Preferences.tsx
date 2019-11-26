@@ -4,22 +4,24 @@ import {
   StyleSheet,
   Text,
   ScrollView,
-  SectionList,
-  FlatList,
   Dimensions,
   Platform,
   StatusBar,
   TouchableOpacity,
 } from 'react-native';
-import {useNavigation, useNavigationParam} from 'react-navigation-hooks';
+import {useNavigation} from 'react-navigation-hooks';
+import {useDispatch} from 'react-redux';
 
 import SafeViewWrapper from '../components/SafeViewWrapper';
-import {SportCategories, ISportCategories} from '../api/fetchPreference';
+import {SportCategories} from '../api/fetchPreference';
 import PreferenceCategory from '../components/PreferenceCategory';
 import Header from '../components/Header';
+import {Button} from '../components/Button';
+import {updatePreferenceAction} from '../store/actions/preferences/actions';
 
 const Preferences: React.FC = () => {
   const {navigate} = useNavigation();
+  const dispatch = useDispatch();
 
   const [selectedPreferenceState, setPreferenceState] = React.useState<
     Array<string>
@@ -36,6 +38,11 @@ const Preferences: React.FC = () => {
     [selectedPreferenceState],
   );
 
+  const onSubmitNext = React.useCallback(() => {
+    dispatch(updatePreferenceAction(selectedPreferenceState));
+    navigate('Home');
+  }, [dispatch, selectedPreferenceState]);
+
   return (
     <SafeViewWrapper removeNotch={true}>
       <View style={styles.container}>
@@ -47,13 +54,14 @@ const Preferences: React.FC = () => {
               you achieve your goals
             </Text>
           </View>
-          {SportCategories.map(item => (
+          {SportCategories.map(sport => (
             <PreferenceCategory
-              key={Math.random()
-                .toString(36)
-                .substring(7)}
-              header={item.category}
-              subcategories={item.subcategories}
+              key={sport.id}
+              header={sport.category}
+              subcategories={sport.subcategories.map(subcategory => ({
+                id: subcategory.id,
+                value: subcategory.position,
+              }))}
               onSelect={onSelect}
               selected={selectedPreferenceState}
             />
@@ -63,27 +71,12 @@ const Preferences: React.FC = () => {
           <TouchableOpacity onPress={() => navigate('Home')}>
             <Text style={styles.skipForNowBtn}>Skip For Now</Text>
           </TouchableOpacity>
-          <TouchableOpacity
-            style={[
-              styles.nextBtn,
-              {
-                backgroundColor:
-                  selectedPreferenceState.length > 0 ? '#e11c20' : '#fff',
-              },
-            ]}
+          <Button
+            touchableProps={{onPress: onSubmitNext}}
+            active={selectedPreferenceState.length > 0}
           >
-            <Text
-              style={[
-                styles.nextBtnText,
-                {
-                  color:
-                    selectedPreferenceState.length > 0 ? '#fff' : '#e11c20',
-                },
-              ]}
-            >
-              Next
-            </Text>
-          </TouchableOpacity>
+            Next
+          </Button>
         </View>
       </View>
     </SafeViewWrapper>
@@ -132,21 +125,6 @@ const styles = StyleSheet.create({
     lineHeight: 20,
     letterSpacing: 0,
     color: '#000000',
-  },
-  nextBtn: {
-    borderColor: '#e11c20',
-    borderStyle: 'solid',
-    borderWidth: 1,
-    borderRadius: 5,
-    padding: 11,
-  },
-  nextBtnText: {
-    fontSize: 16,
-    textAlign: 'center',
-    fontWeight: '300',
-    fontStyle: 'normal',
-    lineHeight: 20,
-    color: '#e11c20',
   },
 });
 

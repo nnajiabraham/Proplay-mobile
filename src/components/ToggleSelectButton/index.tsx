@@ -1,8 +1,12 @@
 import React from 'react';
-import {Switch, View, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 
+export interface IOption {
+  id: string;
+  value: string;
+}
 export interface IToggleSelectButtonProps {
-  options: Array<string>;
+  options: Array<IOption>;
   selected: Array<string>;
   onSelect: (key: string) => void;
 }
@@ -16,27 +20,28 @@ const ToggleSelectButton: React.FC<IToggleSelectButtonProps> = ({
     <View style={styles.container}>
       {options.map(option => (
         <TouchableOpacity
-          key={option}
+          key={option.id}
           style={[
             styles.options,
             {
-              backgroundColor: selected.includes(option) ? '#e11c20' : '#fff',
+              backgroundColor: selected.includes(option.id)
+                ? '#e11c20'
+                : '#fff',
             },
             ,
           ]}
-          onPress={() => onSelect(option)}
+          onPress={() => onSelect(option.id)}
         >
           <Text
-            key={option}
             style={[
               styles.text,
               {
-                color: selected.includes(option) ? '#fff' : '#e11c20',
+                color: selected.includes(option.id) ? '#fff' : '#e11c20',
               },
               ,
             ]}
           >
-            {option}
+            {option.value}
           </Text>
         </TouchableOpacity>
       ))}

@@ -1,11 +1,12 @@
 import React from 'react';
 import {View} from 'react-native';
-import ToggleSelectButton from '../ToggleSelectButton';
+import ToggleSelectButton, {IOption} from '../ToggleSelectButton';
 import Header from '../Header';
+import {ISportSubCategory} from 'src/api/fetchPreference';
 
 export interface ISportCategoriesViewProp {
   header: string;
-  subcategories: Array<string>;
+  subcategories: Array<IOption>;
   onSelect: (key: string) => void;
   selected: Array<string>;
 }
