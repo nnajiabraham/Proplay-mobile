@@ -1,8 +1,10 @@
 import React from 'react';
-import {YellowBox} from 'react-native';
+import {YellowBox, Text} from 'react-native';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {Provider} from 'react-redux';
 import {createStore, compose, applyMiddleware} from 'redux';
+import {persistStore} from 'redux-persist';
+import {PersistGate} from 'redux-persist/lib/integration/react';
 
 import AppNavigationContainer from './src/screens';
 import rootReducer from './src/store/reducers';
@@ -10,7 +12,7 @@ import rootReducer from './src/store/reducers';
 // import thunk from 'redux-thunk';
 
 // const middleware = [thunk];
-const middleware = [];
+const middleware: any = [];
 
 // eslint-disable-next-line no-underscore-dangle
 const composeEnhancers =
@@ -21,17 +23,26 @@ const store = createStore(
   {},
   composeEnhancers(applyMiddleware(...middleware)),
 );
+const persistedStore = persistStore(store);
 
 const App: React.FC = () => {
   //ignoring an unnecessary componentWillReceiveProps warning caused from react-navigation
   YellowBox.ignoreWarnings(['Warning: componentWillReceiveProps']);
-  console.log(store.getState());
 
   return (
     <Provider store={store}>
-      <SafeAreaProvider>
-        <AppNavigationContainer />
-      </SafeAreaProvider>
+      <PersistGate
+        loading={
+          <>
+            <Text>Loading</Text>
+          </>
+        }
+        persistor={persistedStore}
+      >
+        <SafeAreaProvider>
+          <AppNavigationContainer />
+        </SafeAreaProvider>
+      </PersistGate>
     </Provider>
   );
 };

@@ -18,6 +18,7 @@ import PreferenceCategory from '../components/PreferenceCategory';
 import Header from '../components/Header';
 import {Button} from '../components/Button';
 import {updatePreferenceAction} from '../store/actions/preferences/actions';
+import {setFirstTimeUserAction} from '../store/actions/userSettings/actions';
 
 const Preferences: React.FC = () => {
   const {navigate} = useNavigation();
@@ -40,6 +41,7 @@ const Preferences: React.FC = () => {
 
   const onSubmitNext = React.useCallback(() => {
     dispatch(updatePreferenceAction(selectedPreferenceState));
+    dispatch(setFirstTimeUserAction(false));
     navigate('Home');
   }, [dispatch, selectedPreferenceState]);
 

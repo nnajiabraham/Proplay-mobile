@@ -2,11 +2,14 @@ import {
   PreferenceActionTypes,
   SET_PREFERENCE,
 } from '../actions/preferences/types';
+import {persistReducer} from 'redux-persist';
+import AsyncStorage from '@react-native-community/async-storage';
+import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
 
-interface IDefaultPreferenceState {
+export interface IPreferenceState {
   chosenPreference: Array<string>;
 }
-const defaultPreferenceState: IDefaultPreferenceState = {
+const defaultPreferenceState: IPreferenceState = {
   chosenPreference: [],
 };
 const preferencesReducer = (
@@ -22,4 +25,10 @@ const preferencesReducer = (
   }
 };
 
-export default preferencesReducer;
+const persistConfig = {
+  key: 'preferences',
+  storage: AsyncStorage,
+  stateReconciler: autoMergeLevel2,
+  whitelist: ['chosenPreference'],
+};
+export default persistReducer(persistConfig, preferencesReducer);

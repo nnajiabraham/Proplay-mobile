@@ -48,6 +48,11 @@ target 'proplay' do
 
   pod 'react-native-viewpager', :path => '../node_modules/@react-native-community/viewpager'
 
+
+  pod 'RNCAsyncStorage', :path => '../node_modules/@react-native-community/async-storage'
+
+  pod 'RNReanimated', :path => '../node_modules/react-native-reanimated'
+
   target 'proplayTests' do
     inherit! :search_paths
     # Pods for testing
