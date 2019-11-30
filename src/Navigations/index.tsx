@@ -4,13 +4,14 @@ import {createStackNavigator} from 'react-navigation-stack';
 import {createAppContainer} from 'react-navigation';
 import createAnimatedSwitchNavigator from 'react-navigation-animated-switch';
 import {Transition} from 'react-native-reanimated';
-
-import Home from './Home';
-import Search from './Search';
-import Profile from './Profile';
-import Preference from './Preferences';
-import RouteDecision from './RouteDecision';
 import CustomTab from '../components/CustomTab';
+
+import Home from '../screens/Home/Home';
+import RouteDecision from './RouteDecision';
+import Search from '../screens/Search/Search';
+import Profile from '../screens/Profile/Profile';
+import Preference from '../screens/Onboarding/Preferences';
+import ProsToFollow from '../screens/Onboarding/ProsToFollow';
 
 const HomeStack = createBottomTabNavigator(
   {
@@ -49,9 +50,10 @@ const AppStack = createStackNavigator(
   },
 );
 
-const PreferenceStack = createStackNavigator(
+const OnboardingStack = createStackNavigator(
   {
     Preference: Preference,
+    ProsToFollow: ProsToFollow,
     // Search: SearchScreen,
     // Pro: ProProfileScreen,
     // AddPost: ProPostScreen,
@@ -64,10 +66,10 @@ const PreferenceStack = createStackNavigator(
   },
 );
 
-const SwitchNavigator = createAnimatedSwitchNavigator(
+const SwitchNavigator: any = createAnimatedSwitchNavigator(
   {
     Home: AppStack,
-    PreferenceStack: PreferenceStack,
+    OnboardingStack: OnboardingStack,
     RouteDecision: RouteDecision,
   },
   {
@@ -75,11 +77,11 @@ const SwitchNavigator = createAnimatedSwitchNavigator(
     transition: (
       <Transition.Together>
         <Transition.Out
-          type="slide-bottom"
-          durationMs={400}
+          type="slide-left"
+          durationMs={200}
           interpolation="easeIn"
         />
-        <Transition.In type="fade" durationMs={500} />
+        <Transition.In type="fade" durationMs={200} />
       </Transition.Together>
     ),
   },

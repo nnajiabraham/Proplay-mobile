@@ -6,7 +6,7 @@ import {createStore, compose, applyMiddleware} from 'redux';
 import {persistStore} from 'redux-persist';
 import {PersistGate} from 'redux-persist/lib/integration/react';
 
-import AppNavigationContainer from './src/screens';
+import AppNavigationContainer from './src/Navigations';
 import rootReducer from './src/store/reducers';
 
 // import thunk from 'redux-thunk';

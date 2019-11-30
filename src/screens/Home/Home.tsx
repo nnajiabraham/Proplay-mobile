@@ -7,8 +7,8 @@ import {
   Platform,
   Dimensions,
 } from 'react-native';
-import SafeViewWrapper from '../components/SafeViewWrapper';
-import VideoFlatList from '../components/VideoFlatList';
+import SafeViewWrapper from '../../components/SafeViewWrapper';
+import VideoFlatList from '../../components/VideoFlatList';
 
 const styles = StyleSheet.create({
   container: {

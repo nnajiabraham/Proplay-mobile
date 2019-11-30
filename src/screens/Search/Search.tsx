@@ -1,15 +1,15 @@
 import React from 'react';
 import {View, Text} from 'react-native';
-import SafeViewWrapper from '../components/SafeViewWrapper';
+import SafeViewWrapper from '../../components/SafeViewWrapper';
 
-const Profile = () => {
+const Search = () => {
   return (
     <SafeViewWrapper>
       <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-        <Text>Profile Page</Text>
+        <Text>Search Page</Text>
       </View>
     </SafeViewWrapper>
   );
 };
 
-export default Profile;
+export default Search;

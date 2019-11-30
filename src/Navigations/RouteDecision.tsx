@@ -28,10 +28,12 @@ const RouteDecision: React.FC = () => {
   );
   const {navigate} = useNavigation();
 
+  // On mount check if firstTime user
   React.useEffect(() => {
-    userSettings.user.firstTimeUser
-      ? navigate('PreferenceStack')
-      : navigate('Home');
+    navigate('OnboardingStack');
+    // userSettings.user.firstTimeUser
+    //   ? navigate('PreferenceStack')
+    //   : navigate('Home');
   }, []);
 
   return (

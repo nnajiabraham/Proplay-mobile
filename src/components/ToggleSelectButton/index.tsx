@@ -1,53 +1,92 @@
 import React from 'react';
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 
-export interface IOption {
-  id: string;
-  value: string;
-}
 export interface IToggleSelectButtonProps {
-  options: Array<IOption>;
-  selected: Array<string>;
-  onSelect: (key: string) => void;
+  onSelect?: (selected: boolean) => void;
+  label: string;
 }
 
 const ToggleSelectButton: React.FC<IToggleSelectButtonProps> = ({
-  options,
-  selected,
   onSelect,
+  label,
 }) => {
+  const [selected, setSelected] = React.useState(false);
+
+  const onSelectHandler = () => {
+    setSelected(!selected);
+  };
+
+  React.useEffect(() => {
+    if (onSelect) {
+      onSelect(selected);
+    }
+  }, [selected]);
+
   return (
     <View style={styles.container}>
-      {options.map(option => (
-        <TouchableOpacity
-          key={option.id}
+      <TouchableOpacity
+        style={[
+          styles.options,
+          {
+            backgroundColor: selected ? '#e11c20' : '#fff',
+          },
+          ,
+        ]}
+        onPress={onSelectHandler}
+      >
+        <Text
           style={[
-            styles.options,
+            styles.text,
             {
-              backgroundColor: selected.includes(option.id)
-                ? '#e11c20'
-                : '#fff',
+              color: selected ? '#fff' : '#e11c20',
             },
             ,
           ]}
-          onPress={() => onSelect(option.id)}
         >
-          <Text
-            style={[
-              styles.text,
-              {
-                color: selected.includes(option.id) ? '#fff' : '#e11c20',
-              },
-              ,
-            ]}
-          >
-            {option.value}
-          </Text>
-        </TouchableOpacity>
-      ))}
+          {label}
+        </Text>
+      </TouchableOpacity>
     </View>
   );
 };
+
+// const ToggleSelectButton: React.FC<IToggleSelectButtonProps> = ({
+//   options,
+//   selected,
+//   onSelect,
+// }) => {
+//   return (
+//     <View style={styles.container}>
+//       {options.map(option => (
+//         <TouchableOpacity
+//           key={option.id}
+//           style={[
+//             styles.options,
+//             {
+//               backgroundColor: selected.includes(option.id)
+//                 ? '#e11c20'
+//                 : '#fff',
+//             },
+//             ,
+//           ]}
+//           onPress={() => onSelect(option.id)}
+//         >
+//           <Text
+//             style={[
+//               styles.text,
+//               {
+//                 color: selected.includes(option.id) ? '#fff' : '#e11c20',
+//               },
+//               ,
+//             ]}
+//           >
+//             {option.value}
+//           </Text>
+//         </TouchableOpacity>
+//       ))}
+//     </View>
+//   );
+// };
 
 const styles = StyleSheet.create({
   container: {

@@ -12,13 +12,13 @@ import {
 import {useNavigation} from 'react-navigation-hooks';
 import {useDispatch} from 'react-redux';
 
-import SafeViewWrapper from '../components/SafeViewWrapper';
-import {SportCategories} from '../api/fetchPreference';
-import PreferenceCategory from '../components/PreferenceCategory';
-import Header from '../components/Header';
-import {Button} from '../components/Button';
-import {updatePreferenceAction} from '../store/actions/preferences/actions';
-import {setFirstTimeUserAction} from '../store/actions/userSettings/actions';
+import SafeViewWrapper from '../../components/SafeViewWrapper';
+import {SportCategories} from '../../api/fetchPreference';
+import PreferenceCategory from '../../components/PreferenceCategory';
+import Header from '../../components/Header';
+import {Button} from '../../components/Button';
+import {updatePreferenceAction} from '../../store/actions/preferences/actions';
+import {setFirstTimeUserAction} from '../../store/actions/userSettings/actions';
 
 const Preferences: React.FC = () => {
   const {navigate} = useNavigation();
@@ -28,22 +28,35 @@ const Preferences: React.FC = () => {
     Array<string>
   >([]);
 
-  const onSelect = React.useCallback(
-    key => {
-      selectedPreferenceState.includes(key)
-        ? setPreferenceState(
-            selectedPreferenceState.filter(option => key !== option),
-          )
-        : setPreferenceState([...selectedPreferenceState, key]);
-    },
-    [selectedPreferenceState],
-  );
+  // const onSelect = React.useCallback(
+  //   key => {
+  //     selectedPreferenceState.includes(key)
+  //       ? setPreferenceState(
+  //           selectedPreferenceState.filter(option => key !== option),
+  //         )
+  //       : setPreferenceState([...selectedPreferenceState, key]);
+  //   },
+  //   [selectedPreferenceState],
+  // );
 
-  const onSubmitNext = React.useCallback(() => {
-    dispatch(updatePreferenceAction(selectedPreferenceState));
-    dispatch(setFirstTimeUserAction(false));
-    navigate('Home');
-  }, [dispatch, selectedPreferenceState]);
+  const onSelect = (selected: boolean) => {};
+
+  const actionButtonsHandler = React.useCallback(
+    (buttonKey: string) => () => {
+      if (buttonKey == 'Next' && selectedPreferenceState.length) {
+        dispatch(updatePreferenceAction(selectedPreferenceState));
+        dispatch(setFirstTimeUserAction(false));
+        navigate('ProsToFollow');
+      }
+
+      if (buttonKey == 'Skip') {
+        dispatch(updatePreferenceAction(selectedPreferenceState));
+        dispatch(setFirstTimeUserAction(false));
+        navigate('Home');
+      }
+    },
+    [dispatch, selectedPreferenceState],
+  );
 
   return (
     <SafeViewWrapper removeNotch={true}>
@@ -70,11 +83,11 @@ const Preferences: React.FC = () => {
           ))}
         </ScrollView>
         <View style={styles.skipNowView}>
-          <TouchableOpacity onPress={() => navigate('Home')}>
+          <TouchableOpacity onPress={actionButtonsHandler('Skip')}>
             <Text style={styles.skipForNowBtn}>Skip For Now</Text>
           </TouchableOpacity>
           <Button
-            touchableProps={{onPress: onSubmitNext}}
+            touchableProps={{onPress: actionButtonsHandler('Next')}}
             active={selectedPreferenceState.length > 0}
           >
             Next
