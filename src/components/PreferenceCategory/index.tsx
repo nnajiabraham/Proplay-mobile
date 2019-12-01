@@ -1,8 +1,8 @@
 import React from 'react';
-import {View} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import ToggleSelectButton from '../ToggleSelectButton';
 import Header from '../Header';
-import {ISportSubCategory} from 'src/api/fetchPreference';
+import {ISportSubCategory, ISportCategories} from 'src/api/fetchPreference';
 
 export interface IOption {
   id: string;
@@ -10,49 +10,60 @@ export interface IOption {
 }
 
 export interface ISportCategoriesViewProp {
-  header: string;
-  subcategories: Array<IOption>;
-  // onSelect: (key: string) => void;
-  selected: Array<string>;
+  categories: ISportCategories;
+  selectedOptions: (options: Array<string>) => void;
 }
 
 const PreferenceCategory: React.FC<ISportCategoriesViewProp> = ({
-  header,
-  subcategories,
+  categories,
+  selectedOptions,
 }) => {
   const [selectedPreferenceState, setPreferenceState] = React.useState<
     Array<string>
   >([]);
 
-  const onSelect = React.useCallback(
-    (id: string) => (selected: boolean) => {
-      selected
-        ? setPreferenceState([...selectedPreferenceState, id])
-        : selectedPreferenceState.filter(options => id !== options);
-    },
-    [],
-  );
+  const onSelect = (id: string) => (selected: boolean) => {
+    selected
+      ? setPreferenceState([...selectedPreferenceState, id])
+      : setPreferenceState(
+          selectedPreferenceState.filter(options => id !== options),
+        );
+  };
 
   React.useEffect(() => {
-    console.log(selectedPreferenceState);
+    selectedOptions(selectedPreferenceState);
   }, [selectedPreferenceState.length]);
 
-  return (
-    <>
-      <View>
-        <Header label={header} />
+  const renderView = () =>
+    categories.map(category => (
+      <View key={category.id} style={{marginBottom: 29}}>
+        <View>
+          <Header label={category.category} />
+        </View>
+        <View style={styles.subcategories}>
+          {category.subcategories.map(option => (
+            <ToggleSelectButton
+              label={option.position}
+              key={option.id}
+              onSelect={onSelect(option.id)}
+            />
+          ))}
+        </View>
       </View>
-      <View>
-        {subcategories.map(option => (
-          <ToggleSelectButton
-            label={option.value}
-            key={option.id}
-            onSelect={onSelect(option.id)}
-          />
-        ))}
-      </View>
-    </>
-  );
+    ));
+
+  return <View style={styles.container}>{renderView()}</View>;
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'space-around',
+  },
+  subcategories: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+  },
+});
 
 export default PreferenceCategory;

@@ -2,13 +2,17 @@ import React from 'react';
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 
 export interface IToggleSelectButtonProps {
-  onSelect?: (selected: boolean) => void;
   label: string;
+  onSelect?: (selected: boolean) => void;
+  viewStyle?: any;
+  textStyle?: any;
 }
 
 const ToggleSelectButton: React.FC<IToggleSelectButtonProps> = ({
   onSelect,
   label,
+  viewStyle,
+  textStyle,
 }) => {
   const [selected, setSelected] = React.useState(false);
 
@@ -23,78 +27,34 @@ const ToggleSelectButton: React.FC<IToggleSelectButtonProps> = ({
   }, [selected]);
 
   return (
-    <View style={styles.container}>
-      <TouchableOpacity
+    <TouchableOpacity
+      style={[
+        styles.options,
+        {
+          backgroundColor: selected ? '#e11c20' : '#fff',
+          ...viewStyle,
+        },
+        ,
+      ]}
+      onPress={onSelectHandler}
+    >
+      <Text
         style={[
-          styles.options,
+          styles.text,
           {
-            backgroundColor: selected ? '#e11c20' : '#fff',
+            color: selected ? '#fff' : '#e11c20',
+            ...textStyle,
           },
           ,
         ]}
-        onPress={onSelectHandler}
       >
-        <Text
-          style={[
-            styles.text,
-            {
-              color: selected ? '#fff' : '#e11c20',
-            },
-            ,
-          ]}
-        >
-          {label}
-        </Text>
-      </TouchableOpacity>
-    </View>
+        {label}
+      </Text>
+    </TouchableOpacity>
   );
 };
 
-// const ToggleSelectButton: React.FC<IToggleSelectButtonProps> = ({
-//   options,
-//   selected,
-//   onSelect,
-// }) => {
-//   return (
-//     <View style={styles.container}>
-//       {options.map(option => (
-//         <TouchableOpacity
-//           key={option.id}
-//           style={[
-//             styles.options,
-//             {
-//               backgroundColor: selected.includes(option.id)
-//                 ? '#e11c20'
-//                 : '#fff',
-//             },
-//             ,
-//           ]}
-//           onPress={() => onSelect(option.id)}
-//         >
-//           <Text
-//             style={[
-//               styles.text,
-//               {
-//                 color: selected.includes(option.id) ? '#fff' : '#e11c20',
-//               },
-//               ,
-//             ]}
-//           >
-//             {option.value}
-//           </Text>
-//         </TouchableOpacity>
-//       ))}
-//     </View>
-//   );
-// };
-
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    flexWrap: 'wrap',
-  },
   options: {
     borderColor: '#e11c20',
     borderStyle: 'solid',
@@ -102,7 +62,9 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     textAlign: 'center',
     padding: 11,
-    margin: 7,
+    marginRight: 7,
+    marginTop: 7,
+    marginBottom: 7,
   },
   text: {
     fontSize: 16,

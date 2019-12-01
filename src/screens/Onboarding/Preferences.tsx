@@ -12,11 +12,11 @@ import {
 import {useNavigation} from 'react-navigation-hooks';
 import {useDispatch} from 'react-redux';
 
-import SafeViewWrapper from '../../components/SafeViewWrapper';
-import {SportCategories} from '../../api/fetchPreference';
-import PreferenceCategory from '../../components/PreferenceCategory';
 import Header from '../../components/Header';
 import {Button} from '../../components/Button';
+import {SportCategories} from '../../api/fetchPreference';
+import SafeViewWrapper from '../../components/SafeViewWrapper';
+import PreferenceCategory from '../../components/PreferenceCategory';
 import {updatePreferenceAction} from '../../store/actions/preferences/actions';
 import {setFirstTimeUserAction} from '../../store/actions/userSettings/actions';
 
@@ -28,18 +28,9 @@ const Preferences: React.FC = () => {
     Array<string>
   >([]);
 
-  // const onSelect = React.useCallback(
-  //   key => {
-  //     selectedPreferenceState.includes(key)
-  //       ? setPreferenceState(
-  //           selectedPreferenceState.filter(option => key !== option),
-  //         )
-  //       : setPreferenceState([...selectedPreferenceState, key]);
-  //   },
-  //   [selectedPreferenceState],
-  // );
-
-  const onSelect = (selected: boolean) => {};
+  const onSelect = (selectedOptions: Array<string>) => {
+    setPreferenceState(selectedOptions);
+  };
 
   const actionButtonsHandler = React.useCallback(
     (buttonKey: string) => () => {
@@ -69,18 +60,10 @@ const Preferences: React.FC = () => {
               you achieve your goals
             </Text>
           </View>
-          {SportCategories.map(sport => (
-            <PreferenceCategory
-              key={sport.id}
-              header={sport.category}
-              subcategories={sport.subcategories.map(subcategory => ({
-                id: subcategory.id,
-                value: subcategory.position,
-              }))}
-              onSelect={onSelect}
-              selected={selectedPreferenceState}
-            />
-          ))}
+          <PreferenceCategory
+            categories={SportCategories}
+            selectedOptions={onSelect}
+          />
         </ScrollView>
         <View style={styles.skipNowView}>
           <TouchableOpacity onPress={actionButtonsHandler('Skip')}>
@@ -104,13 +87,12 @@ const styles = StyleSheet.create({
   },
   scrollView: {
     flexGrow: 1,
-    justifyContent: 'space-around',
     paddingLeft: 20,
     paddingRight: 20,
   },
   header: {
-    marginTop: Platform.OS == 'android' ? StatusBar.currentHeight : 0,
-    marginBottom: Platform.OS == 'android' ? StatusBar.currentHeight : 0,
+    marginTop: Platform.OS == 'android' ? StatusBar.currentHeight : 20,
+    marginBottom: Platform.OS == 'android' ? StatusBar.currentHeight : 20,
   },
   subHeading: {
     fontSize: 16,

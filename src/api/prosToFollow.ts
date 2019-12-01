@@ -1,85 +1,155 @@
-export interface ISportSubCategory {
+export interface IProBio {
   id: string;
-  position: string;
-}
-export interface ISportCategory {
-  id: string;
-  category: string;
-  subcategories: Array<ISportSubCategory>;
+  name: string;
+  profile_picture: string;
+  headline: string;
 }
 
-export type ISportCategories = Array<ISportCategory>;
+export type IProsBioList = Array<IProBio>;
 
 // unique ids were added so as to avoid position name conflicts and be able to differentiate similar positions programmatically
-export const SportCategories: ISportCategories = [
+export const ProSuggestionList: IProsBioList = [
   {
-    id: '75d7ceff-9adf-4e39-84c1-fafdc566a94d',
-    category: 'Football',
-    subcategories: [
-      {
-        id: '8cdb345c-b8ce-40a0-959a-77f185d74ef9',
-        position: 'Defensive Line',
-      },
-      {
-        id: 'bd1de6e0-0ae3-4e5b-b145-1ab93418d7e5',
-        position: 'LineBacker',
-      },
-      {
-        id: '53c29285-32a1-4dd3-a031-6737f9b0be7e',
-        position: 'Quarterback',
-      },
-      {
-        id: '2cf91543-6ae2-4088-9283-59014e055663',
-        position: 'Place Kicker',
-      },
-      {
-        id: '84419dd5-f1d5-4fa8-a2fe-e7311b1cc987',
-        position: 'Secondary',
-      },
-    ],
+    id: '7ss23d7ce##ff-9adf-4ds9-84c1-fafdcdsdssd566a94d',
+    name: 'Craig Roh',
+    profile_picture:
+      'https://images.unsplash.com/photo-1536456675602-3d631437006c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1591&q=80',
+    headline: 'Defensive Line at Bluebombers',
   },
   {
-    id: 'e5d83b49-a7f7-412f-b7ed-677bf1ba8cf9',
-    category: 'Basketball',
-    subcategories: [
-      {
-        id: '8c80c128-06d9-4d03-8a0b-36d61cb08c44',
-        position: 'Point Guard',
-      },
-      {
-        id: '709ce90f-20de-41b5-a7d2-c4ccbd3ac4bf',
-        position: 'Shooting Guard',
-      },
-      {id: '116c5848-0d70-4a9f-bc19-b68bf19fe3a1', position: 'Center'},
-      {
-        id: 'f705e6b9-1add-4ccb-bb81-ccb2cf2b5559',
-        position: 'Power Forward',
-      },
-      {
-        id: 'bb035041-861e-4c8e-ad6d-fc3221816ec8',
-        position: 'Small Forward',
-      },
-    ],
+    id: '8cec8f1d-d4a1-4bbd-88d9-9e7f24d1d5dd',
+    name: 'Afonso Pinto',
+    profile_picture:
+      'https://images.unsplash.com/photo-1565084794475-e6c78c0d8574?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=996&q=80',
+    headline: 'Quarterback at Vikings',
   },
   {
-    id: '999096cb-6b37-4206-b505-6a296411a94c',
-    category: 'Soccer',
-    subcategories: [
-      {
-        id: '67c51516-a24d-4540-94de-d8916fee5650',
-        position: 'GoalKeeper',
-      },
-      {id: 'bcd84789-ade3-4700-8252-04558b844596', position: 'Defender'},
-      {id: 'a2cfd98c-fbb2-4472-a7fb-f244587d5395', position: 'Winger'},
-      {
-        id: '9ce4bc03-8334-4e35-8de1-9dcca3a4c391',
-        position: 'Defensive Midfielder',
-      },
-      {
-        id: '67eefe71-36fa-4242-b87a-89275ea6f056',
-        position: 'Attacking Midfielder',
-      },
-      {id: 'e51d5ff4-5db2-4a1d-b97a-c1d906f0ac53', position: 'Striker'},
-    ],
+    id: 'a3e76cdsds54-7f81ffdf-4dffdff-a8ds26-c156a19bba51',
+    name: 'Alexander Ljung',
+    profile_picture:
+      'https://images.unsplash.com/photo-1565084794475-e6c78c0d8574?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=996&q=80',
+    headline: 'Placekicker at Giants',
+  },
+  {
+    id: '909f84a3-820e-4f35-8eec-a9e85fae0573',
+    name: 'Diane Lansdowne',
+    profile_picture:
+      'https://images.unsplash.com/photo-1568887628423-7c481b26dab8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
+    headline: 'Linebacker at BC Lions',
+  },
+  {
+    id: '2c830d30-5ab1-44fdsdsd2-9654-f6ffsfs6b03c3e9d',
+    name: 'Harinder Bharwal',
+    profile_picture:
+      'https://images.unsplash.com/photo-1565084794475-e6c78c0d8574?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=996&q=80',
+    headline: 'Defensive Line at Bluebombers',
+  },
+
+  {
+    id: '7ss23dd7ceff-9adf-4ds9-84c1-fafdc566a94d',
+    name: 'Craig Roh',
+    profile_picture:
+      'https://images.unsplash.com/photo-1518947245819-189062abafd5?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60',
+    headline: 'Defensive Line at Bluebombers',
+  },
+  {
+    id: '8cec8fd1d-d4ads1-4bbd-88ds9-9e7f24dd1d5dd',
+    name: 'Afonso Pinto',
+    profile_picture:
+      'https://images.unsplash.com/photo-1565084794475-e6c78c0d8574?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=996&q=80',
+    headline: 'Quarterback at Vikings',
+  },
+  {
+    id: 'a3e76c5ds4-7f8ds1-4dfsdf-a8sd26-c156a19bba51',
+    name: 'Alexander Ljung',
+    profile_picture:
+      'https://images.unsplash.com/photo-1518947245819-189062abafd5?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60',
+    headline: 'Placekicker at Giants',
+  },
+  {
+    id: '909f84a3-82ds0e-4f3sd5-8esdec-a9e85sdsfae0573',
+    name: 'Diane Lansdowne',
+    profile_picture:
+      'https://images.unsplash.com/photo-1536456675602-3d631437006c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1591&q=80',
+    headline: 'Linebacker at BC Lions',
+  },
+  {
+    id: '2c830d3sd0-5asdb1-44fsds2-9sd654-f6f6bsd03c3e9d',
+    name: 'Harinder Bharwal',
+    profile_picture:
+      'https://images.unsplash.com/photo-1568887628423-7c481b26dab8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
+    headline: 'Defensive Line at Bluebombers',
+  },
+
+  {
+    id: '7ss23d7ceff-9adf-4ds9-84c1-fafdc566a94d',
+    name: 'Craig Roh',
+    profile_picture:
+      'https://images.unsplash.com/photo-1568887628423-7c481b26dab8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
+    headline: 'Defensive Line at Bluebombers',
+  },
+  {
+    id: '8cecdsdsf8f1d-d4a1-wd4bbd-88fdwwd9-9e7f24dfd1d5dd',
+    name: 'Afonso Pinto',
+    profile_picture:
+      'https://images.unsplash.com/photo-1536456675602-3d631437006c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1591&q=80',
+    headline: 'Quarterback at Vikings',
+  },
+  {
+    id: 'a3e76c54-7f81-4dff-a826-c156a19bba51',
+    name: 'Alexander Ljung',
+    profile_picture:
+      'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80',
+    headline: 'Placekicker at Giants',
+  },
+  {
+    id: '909f84jjiij8ua3-820e-4f35-8eec-a9e85fae0573',
+    name: 'Diane Lansdowne',
+    profile_picture:
+      'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80',
+    headline: 'Linebacker at BC Lions',
+  },
+  {
+    id: '2c830d30-5ab1-44f2-9654-f6f6b03c3e9d',
+    name: 'Harinder Bharwal',
+    profile_picture:
+      'https://images.unsplash.com/photo-1510372133218-3989fab34f98?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60',
+    headline: 'Defensive Line at Bluebombers',
+  },
+
+  {
+    id: '7ss23sdsdd7ceff-9adf-4ds9-8c24c1-fafdc566a94d',
+    name: 'Craig Roh',
+    profile_picture:
+      'https://images.unsplash.com/photo-1510372133218-3989fab34f98?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60',
+    headline: 'Defensive Line at Bluebombers',
+  },
+  {
+    id: '8cec8232dfd1d-d4ads1-4bbd-88dcs9-9e7f24dd1d5dd',
+    name: 'Afonso Pinto',
+    profile_picture:
+      'https://images.unsplash.com/photo-1488474739786-757973c2dff6?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60',
+    headline: 'Quarterback at Vikings',
+  },
+  {
+    id: 'a3e76cc325ds4-7f823ds1-4dfsdf-a8sd26-c156a19bba51',
+    name: 'Alexander Ljung',
+    profile_picture:
+      'https://images.unsplash.com/photo-1488474739786-757973c2dff6?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60',
+    headline: 'Placekicker at Giants',
+  },
+  {
+    id: '909f84a3-82ds0e-4f3c3sd5-8es3c2dec-a9e85sdsfae0573',
+    name: 'Diane Lansdowne',
+    profile_picture:
+      'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80',
+    headline: 'Linebacker at BC Lions',
+  },
+  {
+    id: '2c830d33c2sd0-5asc3db1-44fsds2-9s3c2d654-f6f6bsd03c3e9d',
+    name: 'Harinder Bharwal',
+    profile_picture:
+      'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80',
+    headline: 'Defensive Line at Bluebombers',
   },
 ];

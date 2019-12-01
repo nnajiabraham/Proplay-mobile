@@ -3,7 +3,7 @@ import {Text, StyleSheetProperties, StyleSheet} from 'react-native';
 
 interface IHeaderProps {
   label: string;
-  style?: StyleSheetProperties;
+  style?: any;
 }
 
 const Header: React.FC<IHeaderProps> = ({label, style}) => {
