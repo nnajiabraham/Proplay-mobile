@@ -15,9 +15,39 @@ import {Button} from '../../components/Button';
 import {ProSuggestionList} from '../../api/prosToFollow';
 import {ProToFollowCard} from '../../components/ProToFollowCard';
 import {useNavigation} from 'react-navigation-hooks';
+import {useDispatch} from 'react-redux';
+import {updatePreferenceAction} from '../../store/actions/preferences/actions';
+import {setFirstTimeUserAction} from '../../store/actions/userSettings/actions';
 
 const ProsToFollow = () => {
   const {navigate} = useNavigation();
+  const dispatch = useDispatch();
+
+  const [followedPro, setFollowedPro] = React.useState<Array<string>>([]);
+
+  const onFollow = (id: string) => (followed: boolean) => {
+    followed
+      ? setFollowedPro([...followedPro, id])
+      : setFollowedPro(followedPro.filter(options => id !== options));
+  };
+
+  const actionButtonsHandler = React.useCallback(
+    (buttonKey: string) => () => {
+      if (buttonKey == 'Next' && followedPro.length) {
+        // dispatch(updatePreferenceAction(followedPro));
+        // dispatch(setFirstTimeUserAction(false));
+        navigate('Home');
+      }
+
+      if (buttonKey == 'Skip') {
+        // dispatch(updatePreferenceAction(followedPro));
+        // dispatch(setFirstTimeUserAction(false));
+        navigate('Home');
+      }
+    },
+    [dispatch, followedPro],
+  );
+
   return (
     <SafeViewWrapper removeNotch={true}>
       <View style={styles.container}>
@@ -39,15 +69,18 @@ const ProsToFollow = () => {
               nameLabel={pros.name}
               headlineLabel={pros.headline}
               imgUrl={pros.profile_picture}
+              onFollow={onFollow(pros.id)}
             />
           ))}
         </ScrollView>
         <View style={styles.skipNowView}>
-          <TouchableOpacity onPress={() => navigate('Home')}>
+          <TouchableOpacity onPress={actionButtonsHandler('Skip')}>
             <Text style={styles.skipForNowBtn}>Skip For Now</Text>
           </TouchableOpacity>
           <Button
-            touchableProps={{onPress: () => navigate('Home')}}
+            touchableProps={{
+              onPress: actionButtonsHandler('Next'),
+            }}
             active={true}
           >
             Next

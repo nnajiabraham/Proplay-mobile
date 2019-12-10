@@ -6,12 +6,14 @@ interface IProToFollowCard {
   nameLabel: string;
   headlineLabel: string;
   imgUrl: string;
+  onFollow: (followed: boolean) => void;
 }
 
 export const ProToFollowCard: React.FC<IProToFollowCard> = ({
   nameLabel,
   headlineLabel,
   imgUrl,
+  onFollow,
 }) => {
   return (
     <>
@@ -30,7 +32,11 @@ export const ProToFollowCard: React.FC<IProToFollowCard> = ({
             <Text style={styles.headlineText}>{headlineLabel}</Text>
           </View>
         </View>
-        <ToggleSelectButton label={'Follow'} viewStyle={styles.followBtnView} />
+        <ToggleSelectButton
+          label={'Follow'}
+          viewStyle={styles.followBtnView}
+          onSelect={onFollow}
+        />
       </View>
     </>
   );

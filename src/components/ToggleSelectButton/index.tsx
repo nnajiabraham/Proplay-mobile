@@ -15,15 +15,17 @@ const ToggleSelectButton: React.FC<IToggleSelectButtonProps> = ({
   textStyle,
 }) => {
   const [selected, setSelected] = React.useState(false);
+  const componentFirstMount = React.useRef(true);
 
   const onSelectHandler = () => {
     setSelected(!selected);
   };
 
   React.useEffect(() => {
-    if (onSelect) {
+    if (onSelect && !componentFirstMount.current) {
       onSelect(selected);
     }
+    componentFirstMount.current = false;
   }, [selected]);
 
   return (
