@@ -1,6 +1,8 @@
+import {PermissionStatus} from 'react-native-permissions';
 import {
   UserSettingsActionTypes,
   SET_FIRST_TIME_USER,
+  SET_NOTIFICATION_SETTINGS,
 } from '../actions/userSettings/types';
 import {persistReducer} from 'redux-persist';
 import AsyncStorage from '@react-native-community/async-storage';
@@ -11,6 +13,7 @@ export interface IUserSettingsState {
     userId: string;
     userToken: string;
     firstTimeUser: boolean;
+    notification: PermissionStatus;
   };
 }
 const defaultUserSettingsState: IUserSettingsState = {
@@ -18,6 +21,7 @@ const defaultUserSettingsState: IUserSettingsState = {
     userId: '',
     userToken: '',
     firstTimeUser: true,
+    notification: 'denied',
   },
 };
 const userSettingsReducer = (
@@ -27,6 +31,9 @@ const userSettingsReducer = (
   switch (action.type) {
     case SET_FIRST_TIME_USER: {
       return {...state, user: {...state.user, firstTimeUser: action.payload}};
+    }
+    case SET_NOTIFICATION_SETTINGS: {
+      return {...state, user: {...state.user, notification: action.payload}};
     }
     default:
       return state;

@@ -10,8 +10,7 @@ import Home from '../screens/Home/Home';
 import RouteDecision from './RouteDecision';
 import Search from '../screens/Search/Search';
 import Profile from '../screens/Profile/Profile';
-import Preference from '../screens/Onboarding/Preferences';
-import ProsToFollow from '../screens/Onboarding/ProsToFollow';
+import {Preference, ProsToFollow, Notification} from '../screens/Onboarding';
 
 const HomeStack = createBottomTabNavigator(
   {
@@ -38,11 +37,6 @@ const HomeStack = createBottomTabNavigator(
 const AppStack = createStackNavigator(
   {
     HomeStack: HomeStack,
-    // Search: SearchScreen,
-    // Pro: ProProfileScreen,
-    // AddPost: ProPostScreen,
-    // Video: VideoScreen,
-    // Payments: PaymentScreen,
   },
   {
     initialRouteName: 'HomeStack',
@@ -52,8 +46,9 @@ const AppStack = createStackNavigator(
 
 const OnboardingStack = createStackNavigator(
   {
-    Preference: Preference,
-    ProsToFollow: ProsToFollow,
+    Preference,
+    ProsToFollow,
+    Notification,
     // Search: SearchScreen,
     // Pro: ProProfileScreen,
     // AddPost: ProPostScreen,

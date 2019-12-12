@@ -15,13 +15,9 @@ import {Button} from '../../components/Button';
 import {ProSuggestionList} from '../../api/prosToFollow';
 import {ProToFollowCard} from '../../components/ProToFollowCard';
 import {useNavigation} from 'react-navigation-hooks';
-import {useDispatch} from 'react-redux';
-import {updatePreferenceAction} from '../../store/actions/preferences/actions';
-import {setFirstTimeUserAction} from '../../store/actions/userSettings/actions';
 
 const ProsToFollow = () => {
   const {navigate} = useNavigation();
-  const dispatch = useDispatch();
 
   const [followedPro, setFollowedPro] = React.useState<Array<string>>([]);
 
@@ -33,19 +29,16 @@ const ProsToFollow = () => {
 
   const actionButtonsHandler = React.useCallback(
     (buttonKey: string) => () => {
-      if (buttonKey == 'Next' && followedPro.length) {
-        // dispatch(updatePreferenceAction(followedPro));
-        // dispatch(setFirstTimeUserAction(false));
-        navigate('Home');
+      if (buttonKey == 'Next') {
+        console.log('Send Request To Follow these Pros \n', followedPro);
+        navigate('Notification');
       }
 
       if (buttonKey == 'Skip') {
-        // dispatch(updatePreferenceAction(followedPro));
-        // dispatch(setFirstTimeUserAction(false));
         navigate('Home');
       }
     },
-    [dispatch, followedPro],
+    [followedPro],
   );
 
   return (
