@@ -18,7 +18,7 @@ const VideoPlayer: React.FC<IVideoPlayerProps> = ({
   const player = React.useRef(null);
 
   const onBuffer = () => {
-    // console.log('buffer');
+    // console.log('bufferring, ', e);
   };
 
   const videoError = e => {

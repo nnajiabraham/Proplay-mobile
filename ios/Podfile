@@ -61,6 +61,8 @@ target 'proplay' do
 
   pod 'RNPermissions', :path => '../node_modules/react-native-permissions'
 
+
+
   target 'proplayTests' do
     inherit! :search_paths
     # Pods for testing

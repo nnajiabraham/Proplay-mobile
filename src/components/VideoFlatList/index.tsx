@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
 import {StyleSheet, View, Dimensions, StatusBar, Text} from 'react-native';
-import VideoPlayer from '../VideoPlayer';
+import VideoPlayer, {VideoLogoHeader} from '../VideoPlayer';
 import ViewPager from '@react-native-community/viewpager';
 import {fetchVideo, IVideoFetchResponse} from '../../api/fetchVideo';
-import VideoLogoHeader from '../VideoPlayer/VideoLogoHeader';
 import {useFocusState} from 'react-navigation-hooks';
 
 const VideoFlatList: React.FC = () => {
@@ -18,15 +17,17 @@ const VideoFlatList: React.FC = () => {
   }, []);
 
   const renderItems = () => {
-    return videoList.length == 0 ? (
+    return videoList.length !== 0 ? (
       //TODO: change to a better loading component
-      <Text
+      <View
         style={{
-          color: '#fff',
+          flex: 1,
+          justifyContent: 'center',
+          alignItems: 'center',
         }}
       >
-        Loading...
-      </Text>
+        <Text>Loading...</Text>
+      </View>
     ) : (
       <ViewPager
         style={styles.container}

@@ -9,7 +9,7 @@ const VideoLogoHeader = () => {
   );
 };
 
-var styles = StyleSheet.create({
+const styles = StyleSheet.create({
   header: {
     fontWeight: 'bold',
     backgroundColor: 'transparent',
