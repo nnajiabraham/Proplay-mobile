@@ -26,7 +26,6 @@ const VideoFlatList: React.FC = () => {
         pageMargin={0}
         onPageSelected={e => {
           setActiveVideoIndex(e.nativeEvent.position);
-          console.log('changed\n', e.nativeEvent.position);
         }}
       >
         {videoList.map((vid, index) => (
