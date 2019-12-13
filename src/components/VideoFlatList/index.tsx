@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, View, Dimensions, StatusBar} from 'react-native';
-import VideoPlayer, {VideoLogoHeader, VideoLoading} from '../VideoPlayer';
+import VideoPlayer, {VideoLogoHeader} from '../VideoPlayer';
 import ViewPager from '@react-native-community/viewpager';
 import {fetchVideo, IVideoFetchResponse} from '../../api/fetchVideo';
 import {useFocusState} from 'react-navigation-hooks';
@@ -17,10 +17,7 @@ const VideoFlatList: React.FC = () => {
   }, []);
 
   const renderItems = () => {
-    return videoList.length !== 0 ? (
-      //TODO: change to a better loading component
-      <VideoLoading />
-    ) : (
+    return (
       <ViewPager
         style={styles.container}
         initialPage={0}
