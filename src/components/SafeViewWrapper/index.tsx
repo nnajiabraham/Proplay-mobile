@@ -1,7 +1,7 @@
 import React from 'react';
 import DeviceInfo from 'react-native-device-info';
 import SafeAreaView from 'react-native-safe-area-view';
-import {StyleSheet, Platform, StatusBar} from 'react-native';
+import {StyleSheet} from 'react-native';
 
 interface IProps {
   removeNotch?: boolean;

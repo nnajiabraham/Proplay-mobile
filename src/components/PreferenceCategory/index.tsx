@@ -2,7 +2,7 @@ import React from 'react';
 import {View, StyleSheet} from 'react-native';
 import ToggleSelectButton from '../ToggleSelectButton';
 import Header from '../Header';
-import {ISportSubCategory, ISportCategories} from 'src/api/fetchPreference';
+import {ISportCategories} from 'src/api/fetchPreference';
 
 export interface IOption {
   id: string;

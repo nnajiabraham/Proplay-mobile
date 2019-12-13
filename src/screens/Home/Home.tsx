@@ -1,12 +1,5 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  StatusBar,
-  StyleSheet,
-  Platform,
-  Dimensions,
-} from 'react-native';
+import {View, StatusBar, StyleSheet, Dimensions} from 'react-native';
 import SafeViewWrapper from '../../components/SafeViewWrapper';
 import VideoFlatList from '../../components/VideoFlatList';
 

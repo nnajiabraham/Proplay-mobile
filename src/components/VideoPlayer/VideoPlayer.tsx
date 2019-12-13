@@ -1,7 +1,6 @@
 import React from 'react';
-import {View, StyleSheet, Text, Dimensions} from 'react-native';
-import Video, {OnLoadData} from 'react-native-video';
-import {useFocusState} from 'react-navigation-hooks';
+import {View, StyleSheet, Dimensions} from 'react-native';
+import Video, {OnLoadData, LoadError} from 'react-native-video';
 
 export interface IVideoPlayerProps {
   url: string;
@@ -15,17 +14,17 @@ const VideoPlayer: React.FC<IVideoPlayerProps> = ({
   seekPosition,
 }) => {
   const [videoLoaded, setVideoLoaded] = React.useState<boolean>(false);
-  const player = React.useRef(null);
+  const player = React.useRef<any>(null);
 
   const onBuffer = () => {
     // console.log('bufferring, ', e);
   };
 
-  const videoError = e => {
+  const videoError = (e: LoadError) => {
     console.log('Error', e);
   };
 
-  const onVideoLoad = () => (e: OnLoadData) => {
+  const onVideoLoad = () => (_: OnLoadData) => {
     setVideoLoaded(true);
   };
 

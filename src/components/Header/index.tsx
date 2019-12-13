@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, StyleSheetProperties, StyleSheet} from 'react-native';
+import {Text} from 'react-native';
 
 interface IHeaderProps {
   label: string;

@@ -1,12 +1,5 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  StatusBar,
-  StyleSheet,
-  Platform,
-  Dimensions,
-} from 'react-native';
+import {View, StatusBar, StyleSheet, Dimensions} from 'react-native';
 import {useSelector} from 'react-redux';
 import SafeViewWrapper from '../components/SafeViewWrapper';
 import {ICombineState} from '../store/reducers';

@@ -27,12 +27,10 @@ const TabIcon = ({route, tintColor}: ITabIconProps) => {
 };
 
 const CustomTab = (props: BottomTabBarProps) => {
-  //   console.log('props', props.navigation.state.index);
-  let index = props.navigation.state.index;
-  const style = {
-    ...homeStackStyles[index],
-    ...homeStackStyles.commonStyles,
-  } as any;
+  let index: any = props.navigation.state.index;
+  // const style = {
+  //   ...homeStackStyles[index],
+  // } as any;
 
   const inactiveTintColorForVideo = 'rgba(255,255,255,0.6)';
   const inactiveTintColor = 'rgba(0,0,0,0.6)';
@@ -49,8 +47,8 @@ const CustomTab = (props: BottomTabBarProps) => {
       <BottomTabBar
         {...props}
         renderIcon={TabIcon}
-        style={style}
-        activeTintColor={style.color}
+        style={homeStackStyles[index]}
+        activeTintColor={homeStackStyles[index].color}
         inactiveTintColor={
           index === 0 ? inactiveTintColorForVideo : inactiveTintColor
         }
@@ -60,9 +58,6 @@ const CustomTab = (props: BottomTabBarProps) => {
 };
 
 const homeStackStyles = StyleSheet.create({
-  commonStyles: {
-    // borderRadius: 25,
-  },
   0: {
     backgroundColor: 'rgba(0,0,0,0.7)',
     color: '#fff',

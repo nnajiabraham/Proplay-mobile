@@ -4,7 +4,7 @@ import SafeViewWrapper from '../../components/SafeViewWrapper';
 import LottieView from 'lottie-react-native';
 
 const VideoLoading = () => {
-  const animationRef = React.useRef(null);
+  const animationRef = React.useRef<any>(null);
 
   React.useEffect(() => {
     animationRef?.current?.play();

@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {StyleSheet, View, Dimensions, StatusBar, Text} from 'react-native';
+import React from 'react';
+import {StyleSheet, View, Dimensions, StatusBar} from 'react-native';
 import VideoPlayer, {VideoLogoHeader, VideoLoading} from '../VideoPlayer';
 import ViewPager from '@react-native-community/viewpager';
 import {fetchVideo, IVideoFetchResponse} from '../../api/fetchVideo';

@@ -15,12 +15,10 @@ const Notification: React.FC = () => {
   const actionButtonsHandler = React.useCallback(
     (buttonKey: string) => () => {
       if (buttonKey == 'Allow Notifications') {
-        requestNotifications(['alert', 'sound', 'badge']).then(
-          ({status, settings}) => {
-            dispatch(setNotificationSettings(status));
-            navigate('Home');
-          },
-        );
+        requestNotifications(['alert', 'sound', 'badge']).then(({status}) => {
+          dispatch(setNotificationSettings(status));
+          navigate('Home');
+        });
       }
 
       if (buttonKey == 'Skip') {
