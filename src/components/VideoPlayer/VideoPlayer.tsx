@@ -30,7 +30,7 @@ const VideoPlayer: React.FC<IVideoPlayerProps> = ({
   };
 
   const seekVideoToPosition = (position: number) => {
-    player.current.seek(position);
+    player?.current?.seek(position);
   };
 
   React.useEffect(() => {

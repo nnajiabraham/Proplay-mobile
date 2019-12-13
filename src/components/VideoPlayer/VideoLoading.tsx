@@ -1,26 +1,41 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import SafeViewWrapper from '../../components/SafeViewWrapper';
+import LottieView from 'lottie-react-native';
 
 const VideoLoading = () => {
+  const animationRef = React.useRef(null);
+
+  React.useEffect(() => {
+    animationRef?.current?.play();
+  }, []);
+
   return (
     <SafeViewWrapper>
-      <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-        <Text>Profile Page</Text>
+      <View style={styles.wrapper}>
+        <LottieView
+          style={styles.lottie}
+          source={require('../../assets/lottie/loaders/soundwave-white.json')}
+          autoPlay
+          loop
+          ref={animationRef}
+        />
       </View>
     </SafeViewWrapper>
   );
 };
 
 const styles = StyleSheet.create({
-  header: {
-    fontWeight: 'bold',
+  wrapper: {
+    flex: 1,
     backgroundColor: 'transparent',
-    opacity: 0.8,
-    fontSize: 24,
-    fontStyle: 'normal',
-    letterSpacing: 1,
-    color: '#ffffff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  lottie: {
+    backgroundColor: 'transparent',
+    width: 80,
+    height: 80,
   },
 });
 
