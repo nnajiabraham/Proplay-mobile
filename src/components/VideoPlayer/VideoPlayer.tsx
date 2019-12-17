@@ -25,6 +25,7 @@ const VideoPlayer: React.FC<IVideoPlayerProps> = ({
   const [isVideoLoaded, setIsVideoLoaded] = React.useState<boolean>(false);
   const [videoPause, setVideoPause] = React.useState<boolean>(true);
   const [videoEnd, setVideoEnd] = React.useState<boolean>(false);
+  // const [showInfo, setVideoEnd] = React.useState<boolean>(false);
 
   const player = React.useRef<any>(null);
 
@@ -98,18 +99,15 @@ const VideoPlayer: React.FC<IVideoPlayerProps> = ({
               iconColor={videoPause ? 'rgba(255,255,255,0.6)' : 'transparent'}
             />
           </TouchableOpacity>
-          <View
-            style={[
-              styles.videoInfoContainer,
-              !videoPause ? {display: 'none'} : {},
-            ]}
-          >
-            <VideoInformation
-              viewsCount={viewsCount}
-              proPicURL={proPicURL}
-              title={title}
-            />
-          </View>
+          {videoPause ? (
+            <View style={styles.videoInfoContainer}>
+              <VideoInformation
+                viewsCount={viewsCount}
+                proPicURL={proPicURL}
+                title={title}
+              />
+            </View>
+          ) : null}
         </>
       ) : (
         <VideoLoading />
@@ -169,7 +167,7 @@ const styles = StyleSheet.create({
   videoInfoContainer: {
     position: 'absolute',
     zIndex: 5,
-    top: '80%',
+    top: '78%',
     width: '100%',
   },
 });
