@@ -1,34 +1,42 @@
 import React from 'react';
 import {View, StyleSheet, Dimensions, TouchableOpacity} from 'react-native';
-import Video, {OnLoadData, LoadError} from 'react-native-video';
+import Video, {OnLoadData, LoadError, OnSeekData} from 'react-native-video';
 import VideoLoading from './VideoLoading';
 import VideoControls from './VideoControls';
+import VideoInformation from './VideoInformation';
 
 export interface IVideoPlayerProps {
   url: string;
   videoClosed: boolean;
   seekPosition?: number;
+  viewsCount?: string;
+  title?: string;
+  proPicURL?: string;
 }
 
 const VideoPlayer: React.FC<IVideoPlayerProps> = ({
   url,
   videoClosed = true,
   seekPosition,
+  viewsCount,
+  title,
+  proPicURL,
 }) => {
   const [isVideoLoaded, setIsVideoLoaded] = React.useState<boolean>(false);
   const [videoPause, setVideoPause] = React.useState<boolean>(true);
+  const [videoEnd, setVideoEnd] = React.useState<boolean>(false);
 
   const player = React.useRef<any>(null);
 
   const onBuffer = () => {
-    console.log('bufferring, ');
+    // console.log('bufferring, ');
   };
 
   const videoError = (e: LoadError) => {
     console.log('Error', e);
   };
 
-  const onVideoLoad = () => (_: OnLoadData) => {
+  const onVideoLoad = (_: OnLoadData) => {
     setIsVideoLoaded(true);
   };
 
@@ -40,6 +48,25 @@ const VideoPlayer: React.FC<IVideoPlayerProps> = ({
     setVideoPause(!videoPause);
   };
 
+  const onVideoEnd = () => {
+    if (!videoClosed) {
+      console.log('ended');
+      setVideoEnd(true);
+      seekVideoToPosition(0);
+    }
+  };
+
+  const onVideoEndReset = (seekTime: number) => {
+    if (seekTime == 0 && videoEnd) {
+      setVideoPause(!videoPause);
+      setVideoEnd(false);
+    }
+  };
+
+  const onSeekHandler = ({seekTime}: OnSeekData) => {
+    onVideoEndReset(seekTime);
+  };
+
   React.useEffect(() => {
     //seek can only be run after video is loaded
     //run every time video is closed/swiped away so that when reopened we restart to seek position
@@ -47,10 +74,14 @@ const VideoPlayer: React.FC<IVideoPlayerProps> = ({
       seekPosition ? seekVideoToPosition(seekPosition) : seekVideoToPosition(0);
     }
 
-    // pause video when closed
     if (videoClosed) {
       setVideoPause(true);
     }
+
+    return () => {
+      setVideoPause(true);
+      seekVideoToPosition(0);
+    };
   }, [videoClosed, isVideoLoaded]);
 
   const videoLoadingRender = () => (
@@ -61,11 +92,25 @@ const VideoPlayer: React.FC<IVideoPlayerProps> = ({
       ]}
     >
       {isVideoLoaded ? (
-        <TouchableOpacity onPress={handleVideoPaused}>
-          <VideoControls
-            iconColor={videoPause ? 'rgba(255,255,255,0.6)' : 'transparent'}
-          />
-        </TouchableOpacity>
+        <>
+          <TouchableOpacity style={{}} onPress={handleVideoPaused}>
+            <VideoControls
+              iconColor={videoPause ? 'rgba(255,255,255,0.6)' : 'transparent'}
+            />
+          </TouchableOpacity>
+          <View
+            style={[
+              styles.videoInfoContainer,
+              !videoPause ? {display: 'none'} : {},
+            ]}
+          >
+            <VideoInformation
+              viewsCount={viewsCount}
+              proPicURL={proPicURL}
+              title={title}
+            />
+          </View>
+        </>
       ) : (
         <VideoLoading />
       )}
@@ -87,15 +132,16 @@ const VideoPlayer: React.FC<IVideoPlayerProps> = ({
         fullscreen={false}
         resizeMode="cover"
         repeat={false}
-        onLoad={onVideoLoad()}
+        onLoad={onVideoLoad}
+        onEnd={onVideoEnd}
+        onSeek={onSeekHandler}
       />
       {videoLoadingRender()}
     </View>
   );
 };
 
-// Later on in your styles..
-var styles = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     position: 'absolute',
     top: 0,
@@ -119,6 +165,12 @@ var styles = StyleSheet.create({
     alignItems: 'center',
     height: Dimensions.get('window').height,
     width: Dimensions.get('screen').width,
+  },
+  videoInfoContainer: {
+    position: 'absolute',
+    zIndex: 5,
+    top: '80%',
+    width: '100%',
   },
 });
 

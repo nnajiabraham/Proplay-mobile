@@ -14,6 +14,7 @@ const VideoFlatList: React.FC = () => {
 
   React.useEffect(() => {
     setVideoList(fetchVideo());
+    () => setVideoList([]);
   }, []);
 
   const renderItems = () => {
@@ -33,6 +34,9 @@ const VideoFlatList: React.FC = () => {
             key={vid.id}
             url={vid.url}
             videoClosed={isFocused ? !Boolean(activeVideoIndex == index) : true}
+            viewsCount={vid.viewsCount}
+            proPicURL={vid.proPicURL}
+            title={vid.title}
           />
         ))}
       </ViewPager>
