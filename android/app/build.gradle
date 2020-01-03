@@ -185,7 +185,6 @@ dependencies {
     implementation project(':@react-native-community_viewpager')
     implementation project(':react-native-device-info')
     implementation project(':react-native-safe-area-context')
-    implementation project(':react-native-video')
     implementation project(':react-native-vector-icons')
     implementation project(':react-native-svg')
     implementation fileTree(dir: "libs", include: ["*.jar"])

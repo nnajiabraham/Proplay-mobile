@@ -10,6 +10,7 @@ import Home from '../screens/Home/Home';
 import RouteDecision from './RouteDecision';
 import Search from '../screens/Search/Search';
 import Profile from '../screens/Profile/Profile';
+import Post from '../screens/Post/Post';
 import {Preference, ProsToFollow, Notification} from '../screens/Onboarding';
 
 const HomeStack = createBottomTabNavigator(
@@ -19,6 +20,9 @@ const HomeStack = createBottomTabNavigator(
     },
     Search: {
       screen: Search,
+    },
+    Post: {
+      screen: Post,
     },
     Profile: {
       screen: Profile,
@@ -49,7 +53,6 @@ const OnboardingStack = createStackNavigator(
     Preference,
     ProsToFollow,
     Notification,
-    // Search: SearchScreen,
     // Pro: ProProfileScreen,
     // AddPost: ProPostScreen,
     // Video: VideoScreen,
@@ -61,14 +64,26 @@ const OnboardingStack = createStackNavigator(
   },
 );
 
+// const SearchStack = createStackNavigator(
+//   {
+//     Search: Search,
+//   },
+//   {
+//     initialRouteName: 'Search',
+//     headerMode: 'none',
+//   },
+// );
+
 const SwitchNavigator: any = createAnimatedSwitchNavigator(
   {
     Home: AppStack,
     OnboardingStack: OnboardingStack,
     RouteDecision: RouteDecision,
+    // Search: SearchStack,
   },
   {
     initialRouteName: 'RouteDecision',
+    backBehavior: 'order',
     transition: (
       <Transition.Together>
         <Transition.Out

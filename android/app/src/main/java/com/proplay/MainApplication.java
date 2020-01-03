@@ -10,7 +10,6 @@ import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
 import com.reactnativecommunity.viewpager.RNCViewPagerPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.th3rdwave.safeareacontext.SafeAreaContextPackage;
-import com.brentvatne.react.ReactVideoPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.horcrux.svg.SvgPackage;
 import com.facebook.react.ReactNativeHost;
