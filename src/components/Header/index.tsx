@@ -10,15 +10,16 @@ const Header: React.FC<IHeaderProps> = ({label, style}) => {
   return (
     <>
       <Text
-        style={{
-          fontSize: 24,
-          fontWeight: '500',
-          fontStyle: 'normal',
-          lineHeight: 30,
-          letterSpacing: 0,
-          color: '#000000',
-          ...style,
-        }}
+        style={[
+          {
+            fontSize: 24,
+            fontWeight: '500',
+            fontStyle: 'normal',
+            // letterSpacing: 0,
+            color: '#000000',
+          },
+          {...style},
+        ]}
       >
         {label}
       </Text>

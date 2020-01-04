@@ -54,7 +54,10 @@ const Preferences: React.FC = () => {
       <View style={styles.container}>
         <ScrollView contentContainerStyle={styles.scrollView}>
           <View style={styles.header}>
-            <Header label={'What are you interested in?'} />
+            <Header
+              label={'What are you interested in?'}
+              style={{fontWeight: 'bold'}}
+            />
             <Text style={styles.subHeading}>
               Pick your favorite interests to find pros and tips that can help
               you achieve your goals

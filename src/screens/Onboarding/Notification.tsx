@@ -31,7 +31,7 @@ const Notification: React.FC = () => {
   return (
     <SafeViewWrapper removeNotch={true}>
       <View style={styles.container}>
-        <Header label={'Turn on notifications'} />
+        <Header label={'Turn on notifications'} style={{fontWeight: 'bold'}} />
         <Text style={styles.subHeading}>
           Get the most out of Proplay by getting the newest and most helpful
           tips to help you achieve your goals

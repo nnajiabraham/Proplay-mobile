@@ -38,7 +38,7 @@ const PreferenceCategory: React.FC<ISportCategoriesViewProp> = ({
     categories.map(category => (
       <View key={category.id} style={{marginBottom: 29}}>
         <View>
-          <Header label={category.category} />
+          <Header label={category.category} style={{fontWeight: 'bold'}} />
         </View>
         <View style={styles.subcategories}>
           {category.subcategories.map(option => (

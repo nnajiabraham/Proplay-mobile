@@ -49,7 +49,10 @@ const ProsToFollow = () => {
           contentContainerStyle={styles.contentContainerStyle}
         >
           <View style={styles.header}>
-            <Header label={'Pros for you to follow'} />
+            <Header
+              label={'Pros for you to follow'}
+              style={{fontWeight: 'bold'}}
+            />
             <Text style={styles.subHeading}>
               When you follow someone, you’ll see their tips in your Discover
               Timeline
@@ -89,6 +92,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   subHead: {
+    fontWeight: 'bold',
     marginTop: 21,
     marginBottom: 21,
   },
