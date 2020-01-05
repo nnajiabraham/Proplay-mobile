@@ -7,6 +7,7 @@ export interface IVideoFetchResponse {
   viewsCount: string;
   title: string;
   proPicURL: string;
+  thumbnail: string;
 }
 export const fetchVideo = (): Array<IVideoFetchResponse> => {
   return [
@@ -17,6 +18,8 @@ export const fetchVideo = (): Array<IVideoFetchResponse> => {
       title: 'How to throw a pass the right way the real way ',
       proPicURL:
         'https://images.unsplash.com/photo-1536456675602-3d631437006c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1591&q=80',
+      thumbnail:
+        'https://images.unsplash.com/photo-1536456675602-3d631437006c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1591&q=80',
     },
     {
       id: 2,
@@ -24,6 +27,8 @@ export const fetchVideo = (): Array<IVideoFetchResponse> => {
       viewsCount: '2345465',
       title: 'How to throw a pass the right way the real way ',
       proPicURL:
+        'https://images.unsplash.com/photo-1536456675602-3d631437006c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1591&q=80',
+      thumbnail:
         'https://images.unsplash.com/photo-1536456675602-3d631437006c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1591&q=80',
     },
     {
@@ -33,6 +38,8 @@ export const fetchVideo = (): Array<IVideoFetchResponse> => {
       title: 'How to throw a pass the right way the real way ',
       proPicURL:
         'https://images.unsplash.com/photo-1536456675602-3d631437006c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1591&q=80',
+      thumbnail:
+        'https://images.unsplash.com/photo-1536456675602-3d631437006c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1591&q=80',
     },
     {
       id: 4,
@@ -41,6 +48,8 @@ export const fetchVideo = (): Array<IVideoFetchResponse> => {
       title: 'How to throw a pass the right way the real way ',
       proPicURL:
         'https://images.unsplash.com/photo-1536456675602-3d631437006c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1591&q=80',
+      thumbnail:
+        'https://images.unsplash.com/photo-1536456675602-3d631437006c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1591&q=80',
     },
     {
       id: 5,
@@ -48,6 +57,8 @@ export const fetchVideo = (): Array<IVideoFetchResponse> => {
       viewsCount: '2345465',
       title: 'How to throw a pass the right way the real way ',
       proPicURL:
+        'https://images.unsplash.com/photo-1536456675602-3d631437006c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1591&q=80',
+      thumbnail:
         'https://images.unsplash.com/photo-1536456675602-3d631437006c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1591&q=80',
     },
   ];
