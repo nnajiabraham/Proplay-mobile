@@ -82,4 +82,151 @@ export const SportCategories: ISportCategories = [
       {id: 'e51d5ff4-5db2-4a1d-b97a-c1d906f0ac53', position: 'Striker'},
     ],
   },
+  {
+    id: '3339096cb-6bds337-4206-b505-6a296411a94c',
+    category: 'E-Sports',
+    subcategories: [
+      {
+        id: '67c51516-a24d-4540-94de-d8916fee5650',
+        position: 'GoalKeeper',
+      },
+      {id: 'bcd84789-ade3-4700-8252-04558b844596', position: 'Defender'},
+      {id: 'a2cfd98c-fbb2-4472-a7fb-f244587d5395', position: 'Winger'},
+      {
+        id: '9ce4bc03-8334-4e35-8de1-9dcca3a4c391',
+        position: 'Defensive Midfielder',
+      },
+      {
+        id: '67eefe71-36fa-4242-b87a-89275ea6f056',
+        position: 'Attacking Midfielder',
+      },
+      {id: 'e51d5ff4-5db2-4a1d-b97a-c1d906f0ac53', position: 'Striker'},
+    ],
+  },
+  {
+    id: '99909dq26cb-6b37-4206-b505-6a296411a94c',
+    category: 'Baseball',
+    subcategories: [
+      {
+        id: '67c51516-a24d-4540-94de-d8916fee5650',
+        position: 'GoalKeeper',
+      },
+      {id: 'bcd84789-ade3-4700-8252-04558b844596', position: 'Defender'},
+      {id: 'a2cfd98c-fbb2-4472-a7fb-f244587d5395', position: 'Winger'},
+      {
+        id: '9ce4bc03-8334-4e35-8de1-9dcca3a4c391',
+        position: 'Defensive Midfielder',
+      },
+      {
+        id: '67eefe71-36fa-4242-b87a-89275ea6f056',
+        position: 'Attacking Midfielder',
+      },
+      {id: 'e51d5ff4-5db2-4a1d-b97a-c1d906f0ac53', position: 'Striker'},
+    ],
+  },
+  {
+    id: '999096wccb-6b3cdw7-420cd6-b505-6a296411a94c',
+    category: 'Tennis',
+    subcategories: [
+      {
+        id: '67c51516-a24d-4540-94de-d8916fee5650',
+        position: 'GoalKeeper',
+      },
+      {id: 'bcd84789-ade3-4700-8252-04558b844596', position: 'Defender'},
+      {id: 'a2cfd98c-fbb2-4472-a7fb-f244587d5395', position: 'Winger'},
+      {
+        id: '9ce4bc03-8334-4e35-8de1-9dcca3a4c391',
+        position: 'Defensive Midfielder',
+      },
+      {
+        id: '67eefe71-36fa-4242-b87a-89275ea6f056',
+        position: 'Attacking Midfielder',
+      },
+      {id: 'e51d5ff4-5db2-4a1d-b97a-c1d906f0ac53', position: 'Striker'},
+    ],
+  },
+  {
+    id: '9096cb-6b37-4206-b505-6a296411a94c',
+    category: 'Cricket',
+    subcategories: [
+      {
+        id: '67c51516-a24d-4540-94de-d8916fee5650',
+        position: 'GoalKeeper',
+      },
+      {id: 'bcd84789-ade3-4700-8252-04558b844596', position: 'Defender'},
+      {id: 'a2cfd98c-fbb2-4472-a7fb-f244587d5395', position: 'Winger'},
+      {
+        id: '9ce4bc03-8334-4e35-8de1-9dcca3a4c391',
+        position: 'Defensive Midfielder',
+      },
+      {
+        id: '67eefe71-36fa-4242-b87a-89275ea6f056',
+        position: 'Attacking Midfielder',
+      },
+      {id: 'e51d5ff4-5db2-4a1d-b97a-c1d906f0ac53', position: 'Striker'},
+    ],
+  },
+  {
+    id: '9990dcb-6b37-4206-b50dsd5-6a296411a94c',
+    category: 'Golf',
+    subcategories: [
+      {
+        id: '67c51516-a24d-4540-94de-d8916fee5650',
+        position: 'GoalKeeper',
+      },
+      {id: 'bcd84789-ade3-4700-8252-04558b844596', position: 'Defender'},
+      {id: 'a2cfd98c-fbb2-4472-a7fb-f244587d5395', position: 'Winger'},
+      {
+        id: '9ce4bc03-8334-4e35-8de1-9dcca3a4c391',
+        position: 'Defensive Midfielder',
+      },
+      {
+        id: '67eefe71-36fa-4242-b87a-89275ea6f056',
+        position: 'Attacking Midfielder',
+      },
+      {id: 'e51d5ff4-5db2-4a1d-b97a-c1d906f0ac53', position: 'Striker'},
+    ],
+  },
+  {
+    id: '9990dcb-6b37-4206-b50fdlk34dsd5-6a296411a94c',
+    category: 'VolleyBall',
+    subcategories: [
+      {
+        id: '67c51516-a24d-4540-94de-d8916fee5650',
+        position: 'GoalKeeper',
+      },
+      {id: 'bcd84789-ade3-4700-8252-04558b844596', position: 'Defender'},
+      {id: 'a2cfd98c-fbb2-4472-a7fb-f244587d5395', position: 'Winger'},
+      {
+        id: '9ce4bc03-8334-4e35-8de1-9dcca3a4c391',
+        position: 'Defensive Midfielder',
+      },
+      {
+        id: '67eefe71-36fa-4242-b87a-89275ea6f056',
+        position: 'Attacking Midfielder',
+      },
+      {id: 'e51d5ff4-5db2-4a1d-b97a-c1d906f0ac53', position: 'Striker'},
+    ],
+  },
+  {
+    id: 'lkok0dcb-6b37-4206-b50dsd5-6a296411a94c',
+    category: 'Hockey',
+    subcategories: [
+      {
+        id: '67c51516-a24d-4540-94de-d8916fee5650',
+        position: 'GoalKeeper',
+      },
+      {id: 'bcd84789-ade3-4700-8252-04558b844596', position: 'Defender'},
+      {id: 'a2cfd98c-fbb2-4472-a7fb-f244587d5395', position: 'Winger'},
+      {
+        id: '9ce4bc03-8334-4e35-8de1-9dcca3a4c391',
+        position: 'Defensive Midfielder',
+      },
+      {
+        id: '67eefe71-36fa-4242-b87a-89275ea6f056',
+        position: 'Attacking Midfielder',
+      },
+      {id: 'e51d5ff4-5db2-4a1d-b97a-c1d906f0ac53', position: 'Striker'},
+    ],
+  },
 ];

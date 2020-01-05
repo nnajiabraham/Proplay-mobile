@@ -1,11 +1,28 @@
 import React from 'react';
-import {View, Text, StyleSheet, ImageBackground, Image} from 'react-native';
-import {fetchVideo} from '../../api/fetchVideo';
-const asd = fetchVideo();
+import {
+  View,
+  Text,
+  StyleSheet,
+  ImageBackground,
+  Image,
+  TouchableOpacity,
+} from 'react-native';
 
-const RecentTipsCard = ({}) => {
+interface IRecentTipsCard {
+  thumbnailUrl: string;
+  proPicURL: string;
+  proName: string;
+  videoTitle: string;
+}
+
+const RecentTipsCard: React.FC<IRecentTipsCard> = ({
+  thumbnailUrl,
+  proPicURL,
+  proName,
+  videoTitle,
+}) => {
   return (
-    <View
+    <TouchableOpacity
       style={{
         width: 130,
         height: 184,
@@ -16,7 +33,7 @@ const RecentTipsCard = ({}) => {
     >
       <ImageBackground
         source={{
-          uri: asd[0].thumbnail,
+          uri: thumbnailUrl,
         }}
         style={styles.thumbnailImg}
       >
@@ -25,21 +42,39 @@ const RecentTipsCard = ({}) => {
             flex: 1,
             backgroundColor: 'rgba(0,0,0,0.5)',
             padding: 10,
+            justifyContent: 'space-between',
           }}
         >
           <View style={styles.imgView}>
             <Image
               source={{
-                uri: asd[3].proPicURL,
+                uri: proPicURL,
               }}
               style={styles.profileImg}
             />
-            <Text style={{color: '#fff'}}> {asd[0].proName}</Text>
+            <Text
+              style={{
+                color: '#fff',
+                fontSize: 12,
+                fontWeight: '500',
+                fontStyle: 'normal',
+              }}
+            >
+              {proName}
+            </Text>
           </View>
-          <Text>lkjh</Text>
+          <Text
+            style={{
+              color: '#fff',
+              fontSize: 14,
+              fontWeight: '500',
+            }}
+          >
+            {videoTitle}
+          </Text>
         </View>
       </ImageBackground>
-    </View>
+    </TouchableOpacity>
   );
 };
 
@@ -52,13 +87,14 @@ const styles = StyleSheet.create({
   imgView: {
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'space-between',
   },
   profileImg: {
     width: 20,
     height: 20,
-    borderRadius: 40 / 2,
+    borderRadius: 20 / 2,
     overflow: 'hidden',
-    marginRight: 5,
+    // marginRight: 15,
   },
 });
 
