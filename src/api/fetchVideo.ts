@@ -8,6 +8,7 @@ export interface IVideoFetchResponse {
   title: string;
   proPicURL: string;
   thumbnail: string;
+  proName: string;
 }
 export const fetchVideo = (): Array<IVideoFetchResponse> => {
   return [
@@ -20,6 +21,7 @@ export const fetchVideo = (): Array<IVideoFetchResponse> => {
         'https://images.unsplash.com/photo-1536456675602-3d631437006c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1591&q=80',
       thumbnail:
         'https://images.unsplash.com/photo-1536456675602-3d631437006c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1591&q=80',
+      proName: 'Craig Roh',
     },
     {
       id: 2,
@@ -30,6 +32,7 @@ export const fetchVideo = (): Array<IVideoFetchResponse> => {
         'https://images.unsplash.com/photo-1536456675602-3d631437006c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1591&q=80',
       thumbnail:
         'https://images.unsplash.com/photo-1536456675602-3d631437006c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1591&q=80',
+      proName: 'Craig Roh',
     },
     {
       id: 3,
@@ -39,7 +42,8 @@ export const fetchVideo = (): Array<IVideoFetchResponse> => {
       proPicURL:
         'https://images.unsplash.com/photo-1536456675602-3d631437006c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1591&q=80',
       thumbnail:
-        'https://images.unsplash.com/photo-1536456675602-3d631437006c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1591&q=80',
+        'https://images.unsplash.com/photo-1565084794475-e6c78c0d8574?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=996&q=80',
+      proName: 'Craig Roh',
     },
     {
       id: 4,
@@ -49,7 +53,8 @@ export const fetchVideo = (): Array<IVideoFetchResponse> => {
       proPicURL:
         'https://images.unsplash.com/photo-1536456675602-3d631437006c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1591&q=80',
       thumbnail:
-        'https://images.unsplash.com/photo-1536456675602-3d631437006c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1591&q=80',
+        'https://images.unsplash.com/photo-1568887628423-7c481b26dab8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
+      proName: 'Craig Roh',
     },
     {
       id: 5,
@@ -60,6 +65,7 @@ export const fetchVideo = (): Array<IVideoFetchResponse> => {
         'https://images.unsplash.com/photo-1536456675602-3d631437006c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1591&q=80',
       thumbnail:
         'https://images.unsplash.com/photo-1536456675602-3d631437006c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1591&q=80',
+      proName: 'Craig Roh',
     },
   ];
 };

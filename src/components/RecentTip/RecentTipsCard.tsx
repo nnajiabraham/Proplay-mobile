@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, StyleSheet, ImageBackground} from 'react-native';
+import {View, Text, StyleSheet, ImageBackground, Image} from 'react-native';
 import {fetchVideo} from '../../api/fetchVideo';
 const asd = fetchVideo();
 
@@ -18,21 +18,24 @@ const RecentTipsCard = ({}) => {
         source={{
           uri: asd[0].thumbnail,
         }}
-        style={styles.profileImg}
+        style={styles.thumbnailImg}
       >
         <View
           style={{
             flex: 1,
-            backgroundColor: 'transparent',
+            backgroundColor: 'rgba(0,0,0,0.5)',
+            padding: 10,
           }}
         >
-          <Text>lkjh</Text>
-          <Text>lkjh</Text>
-          <Text>lkjh</Text>
-          <Text>lkjh</Text>
-          <Text>lkjh</Text>
-          <Text>lkjh</Text>
-          <Text>lkjh</Text>
+          <View style={styles.imgView}>
+            <Image
+              source={{
+                uri: asd[3].proPicURL,
+              }}
+              style={styles.profileImg}
+            />
+            <Text style={{color: '#fff'}}> {asd[0].proName}</Text>
+          </View>
           <Text>lkjh</Text>
         </View>
       </ImageBackground>
@@ -41,10 +44,21 @@ const RecentTipsCard = ({}) => {
 };
 
 const styles = StyleSheet.create({
-  profileImg: {
+  thumbnailImg: {
     flex: 1,
     borderRadius: 5,
     overflow: 'hidden',
+  },
+  imgView: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  profileImg: {
+    width: 20,
+    height: 20,
+    borderRadius: 40 / 2,
+    overflow: 'hidden',
+    marginRight: 5,
   },
 });
 
