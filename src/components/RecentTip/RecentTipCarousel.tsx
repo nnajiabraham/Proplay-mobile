@@ -1,11 +1,18 @@
 import React from 'react';
 import {ScrollView} from 'react-native';
 import RecentTipsCard from './RecentTipsCard';
-import {fetchVideo} from '../../api/fetchVideo';
-const tips = fetchVideo();
+import {IVideoFetchResponse} from '../../api/fetchVideo';
 
-const RecentTipCarousel = () => {
-  let videoTips = tips.length >= 5 ? tips.slice(0, 5) : tips;
+interface IRecentTipCarouselProps {
+  recentVideoTips: Array<IVideoFetchResponse>;
+}
+
+const RecentTipCarousel: React.FC<IRecentTipCarouselProps> = ({
+  recentVideoTips,
+}) => {
+  let videoTips =
+    recentVideoTips.length >= 5 ? recentVideoTips.slice(0, 5) : recentVideoTips;
+
   return (
     <ScrollView horizontal showsHorizontalScrollIndicator={false}>
       {videoTips.map(tip => (

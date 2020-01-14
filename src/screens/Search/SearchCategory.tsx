@@ -3,17 +3,17 @@ import {Text, ScrollView, View, TouchableOpacity} from 'react-native';
 import SafeViewWrapper from '../../components/SafeViewWrapper';
 import Header from '../../components/Header';
 import ToggleSelectButton from '../../components/ToggleSelectButton';
-import {fetchSearchList} from '../../api/searchFetch';
+import {fetchSport} from '../../api/searchFetch';
 import SearchBar from '../../components/SearchBar';
 import {RecentTipCarousel} from '../../components/RecentTip';
 import {fetchVideo} from '../../api/fetchVideo';
-import {} from 'react-navigation';
-// import {useNavigation} from 'react-navigation-hooks';
 
-const Search = ({navigation}) => {
-  const sportList = fetchSearchList();
+const SearchCategory = ({navigation}: any) => {
+  const sportList = fetchSport();
   const recentVideoTips = fetchVideo();
-  // const {navigate} = useNavigation();
+
+  const header = navigation.getParam('header', 'he');
+  const positions = navigation.getParam('positions', 'heas');
 
   return (
     <SafeViewWrapper removeNotch>
@@ -28,7 +28,7 @@ const Search = ({navigation}) => {
         }}
       >
         <Header
-          label="Search"
+          label={header}
           style={{
             fontWeight: 'bold',
             color: '#000000',
@@ -76,7 +76,7 @@ const Search = ({navigation}) => {
           }}
         >
           <Header
-            label="Sports"
+            label={'Positions'}
             style={{
               fontSize: 24,
               fontWeight: 'bold',
@@ -91,17 +91,12 @@ const Search = ({navigation}) => {
               flexWrap: 'wrap',
             }}
           >
-            {sportList.map(sport => (
+            {positions.map(pos => (
               <ToggleSelectButton
-                label={sport.sportName}
-                key={sport.id}
+                label={pos.position}
+                key={pos.id}
                 onSelect={select => {
-                  if (select) {
-                    navigation.push('SearchCategory', {
-                      header: sport.sportName,
-                      positions: sport.positions,
-                    });
-                  }
+                  console.log(select);
                 }}
               />
             ))}
@@ -112,4 +107,4 @@ const Search = ({navigation}) => {
   );
 };
 
-export default Search;
+export default SearchCategory;

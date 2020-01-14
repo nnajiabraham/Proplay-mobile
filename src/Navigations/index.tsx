@@ -12,6 +12,7 @@ import Search from '../screens/Search/Search';
 import Profile from '../screens/Profile/Profile';
 import Post from '../screens/Post/Post';
 import {Preference, ProsToFollow, Notification} from '../screens/Onboarding';
+import SearchCategory from '../screens/Search/SearchCategory';
 
 const HomeStack = createBottomTabNavigator(
   {
@@ -41,6 +42,7 @@ const HomeStack = createBottomTabNavigator(
 const AppStack = createStackNavigator(
   {
     HomeStack: HomeStack,
+    SearchCategory: SearchCategory,
   },
   {
     initialRouteName: 'HomeStack',
@@ -64,22 +66,11 @@ const OnboardingStack = createStackNavigator(
   },
 );
 
-// const SearchStack = createStackNavigator(
-//   {
-//     Search: Search,
-//   },
-//   {
-//     initialRouteName: 'Search',
-//     headerMode: 'none',
-//   },
-// );
-
 const SwitchNavigator: any = createAnimatedSwitchNavigator(
   {
     Home: AppStack,
     OnboardingStack: OnboardingStack,
     RouteDecision: RouteDecision,
-    // Search: SearchStack,
   },
   {
     initialRouteName: 'RouteDecision',
