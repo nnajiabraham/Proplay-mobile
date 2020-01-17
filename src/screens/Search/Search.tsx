@@ -8,7 +8,16 @@ import SearchBar from '../../components/SearchBar';
 import {RecentTipCarousel} from '../../components/RecentTip';
 import {fetchVideo} from '../../api/fetchVideo';
 import {} from 'react-navigation';
+import {ISportSubCategory} from '../../api/fetchPreference';
 // import {useNavigation} from 'react-navigation-hooks';
+
+interface ITry {
+  header: string;
+  data: {
+    category: Array<ISportSubCategory>;
+    subCategories: Array<string>;
+  };
+}
 
 const Search = ({navigation}) => {
   const sportList = fetchSearchList();
@@ -99,7 +108,10 @@ const Search = ({navigation}) => {
                   if (select) {
                     navigation.push('SearchCategory', {
                       header: sport.sportName,
-                      positions: sport.positions,
+                      data: {
+                        categories: sport.positions,
+                        subCategories: sport.topics,
+                      },
                     });
                   }
                 }}

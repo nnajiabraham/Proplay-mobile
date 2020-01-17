@@ -3,17 +3,24 @@ import {Text, ScrollView, View, TouchableOpacity} from 'react-native';
 import SafeViewWrapper from '../../components/SafeViewWrapper';
 import Header from '../../components/Header';
 import ToggleSelectButton from '../../components/ToggleSelectButton';
-import {fetchSport} from '../../api/searchFetch';
 import SearchBar from '../../components/SearchBar';
 import {RecentTipCarousel} from '../../components/RecentTip';
 import {fetchVideo} from '../../api/fetchVideo';
+import Icon from 'react-native-vector-icons/FontAwesome5';
+import {useNavigation} from 'react-navigation-hooks';
+import {ISportSubCategory} from '../../api/fetchPreference';
 
-const SearchCategory = ({navigation}: any) => {
-  const sportList = fetchSport();
+interface ITry {
+  categories: Array<ISportSubCategory>;
+  subCategories: Array<string>;
+}
+
+const SearchCategory = ({navigation}) => {
   const recentVideoTips = fetchVideo();
+  const {goBack, getParam} = useNavigation();
 
-  const header = navigation.getParam('header', 'he');
-  const positions = navigation.getParam('positions', 'heas');
+  const header = getParam('header');
+  const data: ITry = getParam('data');
 
   return (
     <SafeViewWrapper removeNotch>
@@ -27,15 +34,25 @@ const SearchCategory = ({navigation}: any) => {
           paddingLeft: 20,
         }}
       >
-        <Header
-          label={header}
+        <View
           style={{
-            fontWeight: 'bold',
-            color: '#000000',
+            flexDirection: 'row',
+            alignItems: 'center',
             marginBottom: 16,
-            fontSize: 34,
           }}
-        />
+        >
+          <TouchableOpacity style={{marginRight: 20}} onPress={() => goBack()}>
+            <Icon name="chevron-left" color={'rgba(0,0,0,0.8)'} size={20} />
+          </TouchableOpacity>
+          <Header
+            label={header}
+            style={{
+              fontWeight: 'bold',
+              color: '#000000',
+              fontSize: 34,
+            }}
+          />
+        </View>
         <SearchBar />
         <View
           style={{
@@ -91,12 +108,21 @@ const SearchCategory = ({navigation}: any) => {
               flexWrap: 'wrap',
             }}
           >
-            {positions.map(pos => (
+            {data.categories.map(category => (
               <ToggleSelectButton
-                label={pos.position}
-                key={pos.id}
+                key={category.id}
+                label={category.position}
                 onSelect={select => {
-                  console.log(select);
+                  navigation.push('SearchCategory', {
+                    header: category.position,
+                    data: {
+                      categories: data.subCategories.map(topic => ({
+                        id: category.id + Math.random().toString(21),
+                        position: topic,
+                      })),
+                      subCategories: data.subCategories,
+                    },
+                  });
                 }}
               />
             ))}

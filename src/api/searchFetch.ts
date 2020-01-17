@@ -7,5 +7,17 @@ export const fetchSearchList = () => {
     id: sport.id,
     sportName: sport.category,
     positions: sport.subcategories,
+    topics: [
+      'Catching',
+      'Pitching',
+      'Hitting',
+      'Ball Skills',
+      'Nutrition',
+      'Weights',
+      'Shooting',
+      'Dribbling',
+      'Passing',
+      'Free Kicks',
+    ],
   }));
 };
