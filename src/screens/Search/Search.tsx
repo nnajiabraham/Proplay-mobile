@@ -8,18 +8,18 @@ import SearchBar from '../../components/SearchBar';
 import {RecentTipCarousel} from '../../components/RecentTip';
 import {fetchVideo} from '../../api/fetchVideo';
 import {} from 'react-navigation';
-import {ISportSubCategory} from '../../api/fetchPreference';
+// import {ISportSubCategory} from '../../api/fetchPreference';
 // import {useNavigation} from 'react-navigation-hooks';
 
-interface ITry {
-  header: string;
-  data: {
-    category: Array<ISportSubCategory>;
-    subCategories: Array<string>;
-  };
-}
+// interface ITry {
+//   header: string;
+//   data: {
+//     category: Array<ISportSubCategory>;
+//     subCategories: Array<string>;
+//   };
+// }
 
-const Search = ({navigation}) => {
+const Search = ({navigation}: any) => {
   const sportList = fetchSearchList();
   const recentVideoTips = fetchVideo();
   // const {navigate} = useNavigation();
@@ -45,7 +45,12 @@ const Search = ({navigation}) => {
             fontSize: 34,
           }}
         />
-        <SearchBar />
+        <SearchBar
+          onSearch={searchString => {
+            console.log(searchString);
+            navigation.push('SearchResultList');
+          }}
+        />
         <View
           style={{
             flex: 1,
@@ -66,7 +71,10 @@ const Search = ({navigation}) => {
               marginBottom: 16,
             }}
           />
-          <TouchableOpacity style={{marginRight: 20}}>
+          <TouchableOpacity
+            style={{marginRight: 20}}
+            onPress={() => navigation.push('SearchResultList')}
+          >
             <Text
               style={{
                 fontSize: 16,
@@ -104,6 +112,7 @@ const Search = ({navigation}) => {
               <ToggleSelectButton
                 label={sport.sportName}
                 key={sport.id}
+                disableSelectColor
                 onSelect={select => {
                   if (select) {
                     navigation.push('SearchCategory', {

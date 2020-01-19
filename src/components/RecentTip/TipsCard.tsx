@@ -6,30 +6,37 @@ import {
   ImageBackground,
   Image,
   TouchableOpacity,
+  StyleProp,
+  ViewStyle,
 } from 'react-native';
 
-interface IRecentTipsCard {
+interface ITipsCard {
   thumbnailUrl: string;
   proPicURL: string;
   proName: string;
   videoTitle: string;
+  viewStyle?: StyleProp<ViewStyle>;
 }
 
-const RecentTipsCard: React.FC<IRecentTipsCard> = ({
+const TipsCard: React.FC<ITipsCard> = ({
   thumbnailUrl,
   proPicURL,
   proName,
   videoTitle,
+  viewStyle,
 }) => {
   return (
     <TouchableOpacity
-      style={{
-        width: 130,
-        height: 184,
-        borderRadius: 5,
-        backgroundColor: 'rgba(0, 0, 0, 0.4)',
-        marginRight: 10,
-      }}
+      style={[
+        {
+          width: 130,
+          height: 184,
+          borderRadius: 5,
+          backgroundColor: 'rgba(0, 0, 0, 0.4)',
+          marginRight: 10,
+        },
+        viewStyle,
+      ]}
     >
       <ImageBackground
         source={{
@@ -98,4 +105,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default RecentTipsCard;
+export default TipsCard;

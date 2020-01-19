@@ -15,11 +15,12 @@ interface ITry {
   subCategories: Array<string>;
 }
 
-const SearchCategory = ({navigation}) => {
+const SearchCategory = ({navigation}: any) => {
   const recentVideoTips = fetchVideo();
   const {goBack, getParam} = useNavigation();
 
   const header = getParam('header');
+  const subHeader = getParam('subHeader');
   const data: ITry = getParam('data');
 
   return (
@@ -53,7 +54,12 @@ const SearchCategory = ({navigation}) => {
             }}
           />
         </View>
-        <SearchBar />
+        <SearchBar
+          onSearch={searchString => {
+            console.log(searchString);
+            navigation.push('SearchResultList');
+          }}
+        />
         <View
           style={{
             flex: 1,
@@ -74,7 +80,10 @@ const SearchCategory = ({navigation}) => {
               marginBottom: 16,
             }}
           />
-          <TouchableOpacity style={{marginRight: 20}}>
+          <TouchableOpacity
+            style={{marginRight: 20}}
+            onPress={() => navigation.push('SearchResultList')}
+          >
             <Text
               style={{
                 fontSize: 16,
@@ -93,7 +102,7 @@ const SearchCategory = ({navigation}) => {
           }}
         >
           <Header
-            label={'Positions'}
+            label={subHeader ? subHeader : 'Positions'}
             style={{
               fontSize: 24,
               fontWeight: 'bold',
@@ -112,17 +121,21 @@ const SearchCategory = ({navigation}) => {
               <ToggleSelectButton
                 key={category.id}
                 label={category.position}
+                disableSelectColor
                 onSelect={select => {
-                  navigation.push('SearchCategory', {
-                    header: category.position,
-                    data: {
-                      categories: data.subCategories.map(topic => ({
-                        id: category.id + Math.random().toString(21),
-                        position: topic,
-                      })),
-                      subCategories: data.subCategories,
-                    },
-                  });
+                  if (select) {
+                    navigation.push('SearchCategory', {
+                      header: category.position,
+                      subHeader: 'Topics',
+                      data: {
+                        categories: data.subCategories.map(topic => ({
+                          id: category.id + Math.random().toString(21),
+                          position: topic,
+                        })),
+                        subCategories: data.subCategories,
+                      },
+                    });
+                  }
                 }}
               />
             ))}

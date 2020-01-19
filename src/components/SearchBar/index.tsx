@@ -2,7 +2,11 @@ import React from 'react';
 import {KeyboardAvoidingView, TextInput} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-const SearchBar = () => {
+interface SearchBarProps {
+  onSearch?: (searchString: string) => void;
+}
+
+const SearchBar: React.FC<SearchBarProps> = ({onSearch}) => {
   const [value, onChangeText] = React.useState('');
   return (
     <KeyboardAvoidingView
@@ -36,10 +40,17 @@ const SearchBar = () => {
           backgroundColor: '#fff',
           color: '#424242',
         }}
-        onChangeText={text => onChangeText(text)}
         value={value}
+        onSubmitEditing={e => {
+          if (onSearch != undefined) {
+            onSearch(e.nativeEvent.text);
+          }
+        }}
+        returnKeyType={'search'}
         placeholder={'Search tips'}
+        enablesReturnKeyAutomatically
         placeholderTextColor={'#171717'}
+        onChangeText={text => onChangeText(text)}
       />
     </KeyboardAvoidingView>
   );

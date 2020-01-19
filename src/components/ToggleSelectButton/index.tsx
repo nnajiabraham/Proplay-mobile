@@ -6,6 +6,7 @@ export interface IToggleSelectButtonProps {
   onSelect?: (selected: boolean) => void;
   viewStyle?: any;
   textStyle?: any;
+  disableSelectColor?: boolean;
 }
 
 const ToggleSelectButton: React.FC<IToggleSelectButtonProps> = ({
@@ -13,6 +14,7 @@ const ToggleSelectButton: React.FC<IToggleSelectButtonProps> = ({
   label,
   viewStyle,
   textStyle,
+  disableSelectColor,
 }) => {
   const [selected, setSelected] = React.useState(false);
   const componentFirstMount = React.useRef(true);
@@ -33,7 +35,11 @@ const ToggleSelectButton: React.FC<IToggleSelectButtonProps> = ({
       style={[
         styles.options,
         {
-          backgroundColor: selected ? '#e11c20' : '#fff',
+          backgroundColor: disableSelectColor
+            ? '#fff'
+            : selected
+            ? '#e11c20'
+            : '#fff',
           ...viewStyle,
         },
         ,
@@ -44,7 +50,11 @@ const ToggleSelectButton: React.FC<IToggleSelectButtonProps> = ({
         style={[
           styles.text,
           {
-            color: selected ? '#fff' : '#e11c20',
+            color: disableSelectColor
+              ? '#e11c20'
+              : selected
+              ? '#fff'
+              : '#e11c20',
             ...textStyle,
           },
           ,

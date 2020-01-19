@@ -1,3 +1,3 @@
-import RecentTipsCard from './RecentTipsCard';
+import TipsCard from './TipsCard';
 import RecentTipCarousel from './RecentTipCarousel';
-export {RecentTipsCard, RecentTipCarousel};
+export {TipsCard, RecentTipCarousel};

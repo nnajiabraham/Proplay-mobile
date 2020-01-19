@@ -1,6 +1,6 @@
 import React from 'react';
 import {ScrollView} from 'react-native';
-import RecentTipsCard from './RecentTipsCard';
+import TipsCard from './TipsCard';
 import {IVideoFetchResponse} from '../../api/fetchVideo';
 
 interface IRecentTipCarouselProps {
@@ -16,7 +16,7 @@ const RecentTipCarousel: React.FC<IRecentTipCarouselProps> = ({
   return (
     <ScrollView horizontal showsHorizontalScrollIndicator={false}>
       {videoTips.map(tip => (
-        <RecentTipsCard
+        <TipsCard
           key={tip.id}
           videoTitle={tip.title}
           proName={tip.proName}
