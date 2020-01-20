@@ -1,5 +1,9 @@
-let url =
+const url =
   'https://testingtestingtestingtestingbyabe.s3.amazonaws.com/sampleVid.mp4';
+
+//testing out video encoding for better perfomance
+// const alternateUrl =
+//   'https://res.cloudinary.com/dhw4ovvnl/video/upload/v1579489539/sampleVid_vllbtc.mp4';
 
 export interface IVideoFetchResponse {
   id: string | number;

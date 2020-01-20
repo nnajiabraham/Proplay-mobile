@@ -14,6 +14,7 @@ import Post from '../screens/Post/Post';
 import {Preference, ProsToFollow, Notification} from '../screens/Onboarding';
 import SearchCategory from '../screens/Search/SearchCategory';
 import SearchResultList from '../screens/Search/SearchResultList';
+import VideoPlayer from '../components/VideoPlayer';
 
 const HomeStack = createBottomTabNavigator(
   {
@@ -45,6 +46,7 @@ const AppStack = createStackNavigator(
     HomeStack: HomeStack,
     SearchCategory: SearchCategory,
     SearchResultList: SearchResultList,
+    VideoPlayer: VideoPlayer,
   },
   {
     initialRouteName: 'HomeStack',

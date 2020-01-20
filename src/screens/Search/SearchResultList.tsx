@@ -1,12 +1,10 @@
 import React from 'react';
 import {View, FlatList, TouchableOpacity} from 'react-native';
-// import TipsCard from './TipsCard';
-// import {IVideoFetchResponse} from '../../api/fetchVideo';
 import SafeViewWrapper from '../../components/SafeViewWrapper';
 import {useNavigation} from 'react-navigation-hooks';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import Header from '../../components/Header';
-import {TipsCard} from '../../components/RecentTip';
+import VideoCard from '../../components/VideoPlayer/VideoCard';
 import {fetchVideo} from '../../api/fetchVideo';
 
 interface ISearchResultListProps {}
@@ -19,6 +17,7 @@ let videoList = recentVideoTips.map(v => ({
   proPicURL: v.proPicURL,
   proName: v.proName,
   videoTitle: v.title,
+  url: v.url,
 }));
 
 const SearchResultList: React.FC<ISearchResultListProps> = () => {
@@ -54,7 +53,7 @@ const SearchResultList: React.FC<ISearchResultListProps> = () => {
       <FlatList
         data={videoList}
         renderItem={({item}) => (
-          <TipsCard
+          <VideoCard
             thumbnailUrl={item.thumbnailUrl}
             proPicURL={item.proPicURL}
             proName={item.proName}
@@ -63,6 +62,7 @@ const SearchResultList: React.FC<ISearchResultListProps> = () => {
               width: 173,
               height: 245,
             }}
+            videoUrl={item.url}
           />
         )}
         keyExtractor={item => item.id as string}
@@ -83,21 +83,5 @@ const SearchResultList: React.FC<ISearchResultListProps> = () => {
     </SafeViewWrapper>
   );
 };
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: 'yellow',
-//   },
-//   item: {
-//     backgroundColor: '#f9c2ff',
-//     // padding: 20,
-//     marginVertical: 8,
-//     marginHorizontal: 16,
-//   },
-//   title: {
-//     fontSize: 32,
-//   },
-// });
 
 export default SearchResultList;

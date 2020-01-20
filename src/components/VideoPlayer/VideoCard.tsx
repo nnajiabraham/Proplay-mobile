@@ -9,21 +9,25 @@ import {
   StyleProp,
   ViewStyle,
 } from 'react-native';
+import {withNavigation, NavigationParams} from 'react-navigation';
 
-interface ITipsCard {
+interface ITipsCard extends NavigationParams {
   thumbnailUrl: string;
   proPicURL: string;
   proName: string;
   videoTitle: string;
   viewStyle?: StyleProp<ViewStyle>;
+  videoUrl?: string;
 }
 
-const TipsCard: React.FC<ITipsCard> = ({
+const VideoCard: React.FC<ITipsCard> = ({
   thumbnailUrl,
   proPicURL,
   proName,
   videoTitle,
   viewStyle,
+  videoUrl,
+  navigation,
 }) => {
   return (
     <TouchableOpacity
@@ -37,6 +41,18 @@ const TipsCard: React.FC<ITipsCard> = ({
         },
         viewStyle,
       ]}
+      onPress={() =>
+        videoUrl &&
+        navigation.push('VideoPlayer', {
+          videoUrl,
+          addBackBtn: true,
+          videoInfo: {
+            viewsCount: '23',
+            title: videoTitle,
+            proPicURL,
+          },
+        })
+      }
     >
       <ImageBackground
         source={{
@@ -105,4 +121,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default TipsCard;
+export default withNavigation(VideoCard);

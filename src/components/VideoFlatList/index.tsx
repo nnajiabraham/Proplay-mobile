@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, View, Dimensions, StatusBar} from 'react-native';
-import VideoPlayer, {VideoLogoHeader} from '../VideoPlayer';
+import VideoPlayer from '../VideoPlayer';
 import ViewPager from '@react-native-community/viewpager';
 import {fetchVideo, IVideoFetchResponse} from '../../api/fetchVideo';
 import {useFocusState} from 'react-navigation-hooks';
@@ -45,12 +45,7 @@ const VideoFlatList: React.FC = () => {
 
   return (
     <>
-      <View style={styles.container}>
-        <View style={styles.logo}>
-          <VideoLogoHeader />
-        </View>
-        {renderItems()}
-      </View>
+      <View style={styles.container}>{renderItems()}</View>
     </>
   );
 };
