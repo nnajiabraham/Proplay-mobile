@@ -18,37 +18,11 @@ const VideoFlatList: React.FC = () => {
     () => setVideoList([]);
   }, []);
 
-  // const renderItems = () => {
-  //   return (
-  //     <ViewPager
-  //       style={styles.container}
-  //       initialPage={0}
-  //       transitionStyle="scroll"
-  //       orientation="vertical"
-  //       pageMargin={0}
-  //       onPageSelected={e => {
-  //         setActiveVideoIndex(e.nativeEvent.position);
-  //       }}
-  //     >
-  //       {videoList.map((vid, index) => (
-  //         <VideoPlayer
-  //           key={vid.id}
-  //           url={vid.url}
-  //           videoClosed={isFocused ? !Boolean(activeVideoIndex == index) : true}
-  //           viewsCount={vid.viewsCount}
-  //           proPicURL={vid.proPicURL}
-  //           title={vid.title}
-  //         />
-  //       ))}
-  //     </ViewPager>
-  //   );
-  // };
-
   const itemHeight = Dimensions.get('screen').height;
 
-  const renderItem = ({item, index}: any) => {
+  const renderItem = ({item}: any) => {
     const {id, url, viewsCount, proPicURL, title}: IVideoFetchResponse = item;
-    console.log(index);
+    // console.log(index);
 
     return (
       <View

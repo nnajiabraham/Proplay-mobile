@@ -16,7 +16,7 @@ import VideoLogoHeader from './VideoLogoHeader';
 
 export interface IVideoPlayerProps {
   url: string;
-  videoClosed: boolean;
+  videoClosed?: boolean;
   seekPosition?: number;
   viewsCount?: string;
   title?: string;
@@ -151,7 +151,7 @@ const VideoPlayer: React.FC<IVideoPlayerProps> = ({
         onError={videoError}
         style={styles.video}
         controls={false}
-        paused={videoClosed ? videoClosed : videoPause}
+        paused={videoPause}
         fullscreen={false}
         resizeMode="cover"
         repeat={false}

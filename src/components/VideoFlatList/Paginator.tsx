@@ -9,6 +9,7 @@ import {
   NativeSyntheticEvent,
   NativeScrollEvent,
   Dimensions,
+  Animated,
 } from 'react-native';
 
 export interface IPaginatorProps {
@@ -21,9 +22,12 @@ export interface IPaginatorProps {
 
 const IOS = Platform.OS === 'ios';
 
-const VIEWABILITY_CONFIG = {
+const viewConfig = {
   viewAreaCoveragePercentThreshold: 50,
 };
+
+const onViewChanged = (viewableItems: any) =>
+  console.log(JSON.stringify(viewableItems, null, 4));
 
 const Paginator: React.FC<IPaginatorProps> = ({
   data,
@@ -33,6 +37,8 @@ const Paginator: React.FC<IPaginatorProps> = ({
   itemHeight,
 }) => {
   const [dataIndex, setDataIndex] = React.useState<number>(0);
+
+  const scrollValue = React.useRef(new Animated.Value(0));
   const flatListRef: MutableRefObject<any | undefined> = React.useRef();
 
   const isLegitIndex = (index: number, length: number) => {
@@ -50,7 +56,7 @@ const Paginator: React.FC<IPaginatorProps> = ({
     let nextIndex;
     const scrollSpeed = e!.nativeEvent!.velocity!.y;
 
-    console.log('scrollSpeed ', scrollSpeed);
+    // console.log('scrollSpeed ', scrollSpeed);
 
     if (IOS) {
       scrollSpeed > 0
@@ -76,6 +82,11 @@ const Paginator: React.FC<IPaginatorProps> = ({
   return (
     <>
       <FlatList
+        onScroll={Animated.event([
+          {
+            nativeEvent: {contentOffset: {x: scrollValue.current}},
+          },
+        ])}
         data={data}
         style={styles.flatList}
         renderItem={renderItem}
@@ -83,8 +94,9 @@ const Paginator: React.FC<IPaginatorProps> = ({
         keyExtractor={keyExtractor}
         ref={flatListRef}
         getItemLayout={getItemLayout}
-        viewabilityConfig={VIEWABILITY_CONFIG}
+        viewabilityConfig={viewConfig}
         onScrollEndDrag={onScrollEndDrag}
+        onViewableItemsChanged={onViewChanged}
       />
     </>
   );
@@ -93,8 +105,6 @@ const Paginator: React.FC<IPaginatorProps> = ({
 const styles = StyleSheet.create({
   flatList: {
     flex: 1,
-    // backgroundColor: '#',
-    // height: Dimensions.get('window').height,
     width: Dimensions.get('screen').width,
   },
 
