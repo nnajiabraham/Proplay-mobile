@@ -3,11 +3,14 @@ import {YellowBox, Text} from 'react-native';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {Provider} from 'react-redux';
 import {createStore, compose, applyMiddleware} from 'redux';
+import {enableScreens} from 'react-native-screens';
 import {persistStore} from 'redux-persist';
 import {PersistGate} from 'redux-persist/lib/integration/react';
 
 import AppNavigationContainer from './src/Navigations';
 import rootReducer from './src/store/reducers';
+
+enableScreens();
 
 // import thunk from 'redux-thunk';
 
