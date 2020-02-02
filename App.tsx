@@ -10,6 +10,8 @@ import {PersistGate} from 'redux-persist/lib/integration/react';
 import AppNavigationContainer from './src/Navigations';
 import rootReducer from './src/store/reducers';
 
+// This is for performance to enable react navigation
+// to use native screens rather than rather than JS...
 enableScreens();
 
 // import thunk from 'redux-thunk';
