@@ -44,7 +44,7 @@ const VideoFlatList: React.FC = () => {
   //   );
   // };
 
-  const itemHeight = Dimensions.get('window').height;
+  const itemHeight = Dimensions.get('screen').height;
 
   const renderItem = ({item}: any) => {
     const {id, url, viewsCount, proPicURL, title}: IVideoFetchResponse = item;
@@ -77,10 +77,7 @@ const VideoFlatList: React.FC = () => {
 
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
-    // backgroundColor: '#',
-    height: Dimensions.get('window').height,
-    width: Dimensions.get('screen').width,
+    // padding: 20,
   },
 });
 

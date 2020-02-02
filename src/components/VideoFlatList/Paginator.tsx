@@ -3,11 +3,13 @@ import {
   FlatList,
   Animated,
   Platform,
-  /*ListRenderItem,StyleSheet,*/
+  StyleSheet,
+  /*ListRenderItem,*/
   StyleProp,
   ViewStyle,
   NativeSyntheticEvent,
   NativeScrollEvent,
+  Dimensions,
 } from 'react-native';
 
 export interface IPaginatorProps {
@@ -51,7 +53,7 @@ const Paginator: React.FC<IPaginatorProps> = ({
     let nextIndex;
     const scrollSpeed = e!.nativeEvent!.velocity!.y;
 
-    // console.log('scrollSpeed ', scrollSpeed);
+    console.log('scrollSpeed ', scrollSpeed);
 
     if (IOS) {
       scrollSpeed > 0
@@ -79,38 +81,41 @@ const Paginator: React.FC<IPaginatorProps> = ({
   return (
     <>
       <FlatList
+        // horizontal
         data={data}
-        style={contentContainerStyle}
+        style={styles.flatList}
         renderItem={renderItem}
-        // contentContainerStyle={contentContainerStyle}
+        contentContainerStyle={contentContainerStyle}
         keyExtractor={keyExtractor}
         ref={flatListRef}
         getItemLayout={getItemLayout}
-        // viewabilityConfig={VIEWABILITY_CONFIG}
-        // onViewableItemsChanged={onViewableItemsChanged}
+        viewabilityConfig={VIEWABILITY_CONFIG}
         onScrollEndDrag={onScrollEndDrag}
       />
     </>
   );
 };
 
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//   },
+const styles = StyleSheet.create({
+  flatList: {
+    flex: 1,
+    // backgroundColor: '#',
+    // height: Dimensions.get('window').height,
+    width: Dimensions.get('screen').width,
+  },
 
-//   animationContainer: {
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//     flexDirection: 'row',
-//     marginBottom: 8,
-//   },
+  animationContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'row',
+    marginBottom: 8,
+  },
 
-//   indicator: {
-//     height: 7,
-//     width: 7,
-//     borderRadius: 2,
-//   },
-// });
+  indicator: {
+    height: 7,
+    width: 7,
+    borderRadius: 2,
+  },
+});
 
 export default Paginator;
