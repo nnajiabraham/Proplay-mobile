@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Dimensions, StatusBar, Text} from 'react-native';
+import {StyleSheet, Dimensions, View} from 'react-native';
 import VideoPlayer from '../VideoPlayer';
 // import ViewPager from '@react-native-community/viewpager';
 import {fetchVideo, IVideoFetchResponse} from '../../api/fetchVideo';
@@ -46,12 +46,17 @@ const VideoFlatList: React.FC = () => {
 
   const itemHeight = Dimensions.get('screen').height;
 
-  const renderItem = ({item}: any) => {
+  const renderItem = ({item, index}: any) => {
     const {id, url, viewsCount, proPicURL, title}: IVideoFetchResponse = item;
-    // console.log(index);
+    console.log(index);
 
     return (
-      <>
+      <View
+        style={{
+          height: Dimensions.get('screen').height,
+          width: Dimensions.get('screen').width,
+        }}
+      >
         <VideoPlayer
           key={id}
           url={url}
@@ -60,7 +65,7 @@ const VideoFlatList: React.FC = () => {
           proPicURL={proPicURL}
           title={title}
         />
-      </>
+      </View>
     );
   };
 

@@ -1,7 +1,6 @@
 import React, {MutableRefObject} from 'react';
 import {
   FlatList,
-  Animated,
   Platform,
   StyleSheet,
   /*ListRenderItem,*/
@@ -36,8 +35,6 @@ const Paginator: React.FC<IPaginatorProps> = ({
   const [dataIndex, setDataIndex] = React.useState<number>(0);
   const flatListRef: MutableRefObject<any | undefined> = React.useRef();
 
-  //   const scrollValue = React.useRef(new Animated.Value(0));
-
   const isLegitIndex = (index: number, length: number) => {
     if (index < 0 || index >= length) return false;
     return true;
@@ -66,22 +63,19 @@ const Paginator: React.FC<IPaginatorProps> = ({
     }
 
     if (isLegitIndex(nextIndex, data.length)) {
-      //   console.log(nextIndex);
-
       setDataIndex(nextIndex);
     }
 
     flatListRef.current.scrollToIndex({
       index: dataIndex,
       animated: true,
-      viewPosition: 0.5,
+      viewPosition: 1,
     });
   };
 
   return (
     <>
       <FlatList
-        // horizontal
         data={data}
         style={styles.flatList}
         renderItem={renderItem}
