@@ -62,6 +62,8 @@ target 'proplay' do
 
 
 
+  pod 'RNScreens', :path => '../node_modules/react-native-screens'
+
   target 'proplayTests' do
     inherit! :search_paths
     # Pods for testing
