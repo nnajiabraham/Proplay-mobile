@@ -9,7 +9,6 @@ import {
   NativeSyntheticEvent,
   NativeScrollEvent,
   Dimensions,
-  Animated,
   ViewToken,
 } from 'react-native';
 
@@ -20,6 +19,8 @@ export interface IPaginatorProps {
   contentContainerStyle?: StyleProp<ViewStyle>;
   itemHeight: number;
   currentVisibleIndex: (currentVisibleIndex: number | null) => void;
+  extraData: any;
+  onScrollCallback: (e: any) => void;
 }
 
 type onViewChange = {
@@ -36,11 +37,12 @@ const Paginator: React.FC<IPaginatorProps> = ({
   contentContainerStyle,
   itemHeight,
   currentVisibleIndex,
+  extraData,
+  onScrollCallback,
 }) => {
   const [dataIndex, setDataIndex] = React.useState<number>(0);
   const [visibleIndex, setVisibleIndex] = React.useState<number | null>(0);
 
-  const scrollValue = React.useRef(new Animated.Value(0));
   const flatListRef: MutableRefObject<any | undefined> = React.useRef();
   const viewConfigRef = React.useRef({viewAreaCoveragePercentThreshold: 70});
 
@@ -48,6 +50,7 @@ const Paginator: React.FC<IPaginatorProps> = ({
     ({viewableItems, changed}: onViewChange) => {
       if (viewableItems && viewableItems.length > 0) {
         setVisibleIndex(viewableItems[0].index);
+        changed;
       }
 
       //   console.log(
@@ -78,14 +81,14 @@ const Paginator: React.FC<IPaginatorProps> = ({
     let nextIndex;
     const scrollSpeed = e!.nativeEvent!.velocity!.y;
 
-    // console.log('scrollSpeed ', scrollSpeed);
+    // console.log('scrollSpeed ', JSON.stringify(e.nativeEvent, null, 4));
 
     if (IOS) {
-      scrollSpeed > 0
+      scrollSpeed > 0.5
         ? (nextIndex = dataIndex + 1)
         : (nextIndex = dataIndex - 1);
     } else {
-      scrollSpeed < 0
+      scrollSpeed < 0.5
         ? (nextIndex = dataIndex + 1)
         : (nextIndex = dataIndex - 1);
     }
@@ -119,6 +122,12 @@ const Paginator: React.FC<IPaginatorProps> = ({
         viewabilityConfig={viewConfigRef.current}
         onScrollEndDrag={onScrollEndDrag}
         onViewableItemsChanged={onViewChangedRef.current}
+        extraData={extraData}
+        onScroll={onScrollCallback}
+        decelerationRate={'fast'}
+        onLayout={e =>
+          console.log('onLayout', JSON.stringify(e.nativeEvent, null, 5))
+        }
       />
     </>
   );

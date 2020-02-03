@@ -57,9 +57,11 @@ const VideoFlatList: React.FC = () => {
       keyExtractor={(item: IVideoFetchResponse) => item.id.toString()}
       itemHeight={itemHeight}
       contentContainerStyle={styles.container}
-      currentVisibleIndex={(currentVisibleIndex: any) => {
+      currentVisibleIndex={(_: any) => {
         // console.log('currentVisibleIndex', currentVisibleIndex);
       }}
+      extraData={videoList}
+      onScrollCallback={_ => setVideoList([...videoList, ...fetchVideo()])}
     />
   );
 };

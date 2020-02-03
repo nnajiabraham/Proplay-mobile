@@ -1,8 +1,8 @@
 import React from 'react';
 import {View, StatusBar, StyleSheet, Dimensions} from 'react-native';
 import SafeViewWrapper from '../../components/SafeViewWrapper';
-// import VideoFlatList from '../../components/VideoFlatList/VideoFlatList2';
-import VideoFlatList from '../../components/VideoFlatList/VideoFlatList3';
+import VideoFlatList from '../../components/VideoFlatList/VideoFlatList2';
+// import VideoFlatList from '../../components/VideoFlatList/VideoFlatList3';
 // import VideoFlatList from '../../components/VideoFlatList';
 
 const styles = StyleSheet.create({

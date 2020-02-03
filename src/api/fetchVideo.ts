@@ -38,7 +38,7 @@ export interface IVideoFetchResponse {
 
 export const fetchVideo = (): Array<IVideoFetchResponse> =>
   Array.from(
-    {length: 200},
+    {length: 2},
     () =>
       ({
         id: faker.random.uuid(),
