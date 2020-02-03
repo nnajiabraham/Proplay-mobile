@@ -1,9 +1,9 @@
 import React from 'react';
-import {StyleSheet, Dimensions, View} from 'react-native';
+import {View, Text, Dimensions, StyleSheet} from 'react-native';
+import Carousel from 'react-native-snap-carousel';
 import VideoPlayer from '../VideoPlayer';
 import {fetchVideo, IVideoFetchResponse} from '../../api/fetchVideo';
 import {useFocusState} from 'react-navigation-hooks';
-import Paginator from './Paginator';
 
 const VideoFlatList: React.FC = () => {
   const [videoList, setVideoList] = React.useState<Array<IVideoFetchResponse>>(
@@ -17,17 +17,12 @@ const VideoFlatList: React.FC = () => {
     currentVideoIndex;
     () => setVideoList([]);
   }, []);
-
-  React.useEffect(() => {
-    // console.log('currentVideoIndex', currentVideoIndex);
-  }, [currentVideoIndex]);
-
-  const itemHeight = Dimensions.get('screen').height;
+  const ref = React.useRef(null);
 
   const renderItem = ({item, index}: any) => {
     const {id, url, viewsCount, proPicURL, title}: IVideoFetchResponse = item;
     // console.log(index);
-    setCurrentVideoIndex(index);
+    //   setCurrentVideoIndex(index);
     // const currentIndex = index;
     // const currentVisibleIndex = 0;
 
@@ -51,23 +46,18 @@ const VideoFlatList: React.FC = () => {
   };
 
   return (
-    <Paginator
+    <Carousel
+      ref={ref}
       data={videoList}
       renderItem={renderItem}
-      keyExtractor={(item: IVideoFetchResponse) => item.id.toString()}
-      itemHeight={itemHeight}
-      contentContainerStyle={styles.container}
-      currentVisibleIndex={(currentVisibleIndex: any) => {
-        // console.log('currentVisibleIndex', currentVisibleIndex);
-      }}
+      sliderWidth={Dimensions.get('screen').width}
+      sliderHeight={Dimensions.get('screen').height}
+      slideStyle={{width: Dimensions.get('screen').width}}
+      itemWidth={Dimensions.get('screen').width}
+      itemHeight={Dimensions.get('screen').height}
+      vertical={true}
     />
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    // padding: 20,
-  },
-});
 
 export default VideoFlatList;

@@ -10,6 +10,7 @@ import {
   NativeScrollEvent,
   Dimensions,
   Animated,
+  ViewToken,
 } from 'react-native';
 
 export interface IPaginatorProps {
@@ -18,16 +19,15 @@ export interface IPaginatorProps {
   keyExtractor?: (item: any, index: number) => string;
   contentContainerStyle?: StyleProp<ViewStyle>;
   itemHeight: number;
+  currentVisibleIndex: (currentVisibleIndex: number | null) => void;
 }
 
-const IOS = Platform.OS === 'ios';
-
-const viewConfig = {
-  viewAreaCoveragePercentThreshold: 50,
+type onViewChange = {
+  viewableItems: Array<ViewToken>;
+  changed: Array<ViewToken>;
 };
 
-const onViewChanged = (viewableItems: any) =>
-  console.log(JSON.stringify(viewableItems, null, 4));
+const IOS = Platform.OS === 'ios';
 
 const Paginator: React.FC<IPaginatorProps> = ({
   data,
@@ -35,11 +35,33 @@ const Paginator: React.FC<IPaginatorProps> = ({
   keyExtractor,
   contentContainerStyle,
   itemHeight,
+  currentVisibleIndex,
 }) => {
   const [dataIndex, setDataIndex] = React.useState<number>(0);
+  const [visibleIndex, setVisibleIndex] = React.useState<number | null>(0);
 
   const scrollValue = React.useRef(new Animated.Value(0));
   const flatListRef: MutableRefObject<any | undefined> = React.useRef();
+  const viewConfigRef = React.useRef({viewAreaCoveragePercentThreshold: 70});
+
+  const onViewChangedRef = React.useRef(
+    ({viewableItems, changed}: onViewChange) => {
+      if (viewableItems && viewableItems.length > 0) {
+        setVisibleIndex(viewableItems[0].index);
+      }
+
+      //   console.log(
+      //     'viewableItems\n\n\n',
+      //     JSON.stringify(viewableItems, null, 4),
+      //   );
+
+      //   console.log('changed\n\n\n', JSON.stringify(changed, null, 4), '\n\n\n');
+    },
+  );
+
+  React.useEffect(() => {
+    currentVisibleIndex(visibleIndex);
+  }, [visibleIndex]);
 
   const isLegitIndex = (index: number, length: number) => {
     if (index < 0 || index >= length) return false;
@@ -75,18 +97,18 @@ const Paginator: React.FC<IPaginatorProps> = ({
     flatListRef.current.scrollToIndex({
       index: dataIndex,
       animated: true,
-      viewPosition: 1,
+      viewPosition: 0,
     });
   };
 
   return (
     <>
       <FlatList
-        onScroll={Animated.event([
-          {
-            nativeEvent: {contentOffset: {x: scrollValue.current}},
-          },
-        ])}
+        // onScroll={Animated.event([
+        //   {
+        //     nativeEvent: {contentOffset: {x: scrollValue.current}},
+        //   },
+        // ])}
         data={data}
         style={styles.flatList}
         renderItem={renderItem}
@@ -94,9 +116,9 @@ const Paginator: React.FC<IPaginatorProps> = ({
         keyExtractor={keyExtractor}
         ref={flatListRef}
         getItemLayout={getItemLayout}
-        viewabilityConfig={viewConfig}
+        viewabilityConfig={viewConfigRef.current}
         onScrollEndDrag={onScrollEndDrag}
-        onViewableItemsChanged={onViewChanged}
+        onViewableItemsChanged={onViewChangedRef.current}
       />
     </>
   );
