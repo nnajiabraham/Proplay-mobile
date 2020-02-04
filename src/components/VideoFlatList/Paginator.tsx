@@ -44,7 +44,7 @@ const Paginator: React.FC<IPaginatorProps> = ({
   const [visibleIndex, setVisibleIndex] = React.useState<number | null>(0);
 
   const flatListRef: MutableRefObject<any | undefined> = React.useRef();
-  const viewConfigRef = React.useRef({viewAreaCoveragePercentThreshold: 70});
+  const viewConfigRef = React.useRef({viewAreaCoveragePercentThreshold: 60});
 
   const onViewChangedRef = React.useRef(
     ({viewableItems, changed}: onViewChange) => {
@@ -84,11 +84,11 @@ const Paginator: React.FC<IPaginatorProps> = ({
     // console.log('scrollSpeed ', JSON.stringify(e.nativeEvent, null, 4));
 
     if (IOS) {
-      scrollSpeed > 0.5
+      scrollSpeed > 1
         ? (nextIndex = dataIndex + 1)
         : (nextIndex = dataIndex - 1);
     } else {
-      scrollSpeed < 0.5
+      scrollSpeed < 1
         ? (nextIndex = dataIndex + 1)
         : (nextIndex = dataIndex - 1);
     }
@@ -107,11 +107,6 @@ const Paginator: React.FC<IPaginatorProps> = ({
   return (
     <>
       <FlatList
-        // onScroll={Animated.event([
-        //   {
-        //     nativeEvent: {contentOffset: {x: scrollValue.current}},
-        //   },
-        // ])}
         data={data}
         style={styles.flatList}
         renderItem={renderItem}
@@ -125,6 +120,10 @@ const Paginator: React.FC<IPaginatorProps> = ({
         extraData={extraData}
         onScroll={onScrollCallback}
         decelerationRate={'fast'}
+        alwaysBounceVertical={false}
+        snapToInterval={itemHeight}
+        snapToAlignment={'center'}
+        bounces={false}
         onLayout={e =>
           console.log('onLayout', JSON.stringify(e.nativeEvent, null, 5))
         }
