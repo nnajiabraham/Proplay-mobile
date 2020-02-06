@@ -115,7 +115,7 @@ const Paginator: React.FC<IPaginatorProps> = ({
     if (scrollIndex) {
       flatListRef.current.scrollToIndex({
         index: scrollIndex,
-        animated: true,
+        animated: false,
         viewPosition: 0,
       });
     }
