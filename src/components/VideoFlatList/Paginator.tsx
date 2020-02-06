@@ -3,7 +3,6 @@ import {
   FlatList,
   Platform,
   StyleSheet,
-  /*ListRenderItem,*/
   StyleProp,
   ViewStyle,
   NativeSyntheticEvent,
@@ -42,9 +41,13 @@ const Paginator: React.FC<IPaginatorProps> = ({
 }) => {
   const [dataIndex, setDataIndex] = React.useState<number>(0);
   const [visibleIndex, setVisibleIndex] = React.useState<number | null>(0);
+  // const [index, setIndex] = React.useState<number>(0);
 
   const flatListRef: MutableRefObject<any | undefined> = React.useRef();
-  const viewConfigRef = React.useRef({viewAreaCoveragePercentThreshold: 60});
+  const viewConfigRef = React.useRef({
+    // viewAreaCoveragePercentThreshold: 80,
+    itemVisiblePercentThreshold: 80,
+  });
 
   const onViewChangedRef = React.useRef(
     ({viewableItems, changed}: onViewChange) => {
@@ -67,8 +70,7 @@ const Paginator: React.FC<IPaginatorProps> = ({
   }, [visibleIndex]);
 
   const isLegitIndex = (index: number, length: number) => {
-    if (index < 0 || index >= length) return false;
-    return true;
+    return index >= 0 && index < length ? true : false;
   };
 
   const getItemLayout = (_: Array<any> | null, index: number) => ({
@@ -77,31 +79,46 @@ const Paginator: React.FC<IPaginatorProps> = ({
     index,
   });
 
-  const onScrollEndDrag = (e: NativeSyntheticEvent<NativeScrollEvent>) => {
-    let nextIndex;
-    const scrollSpeed = e!.nativeEvent!.velocity!.y;
-
-    // console.log('scrollSpeed ', JSON.stringify(e.nativeEvent, null, 4));
-
+  const calculateScrollDirectionIndex = (scrollSpeed: number) => {
+    let scrollIndex;
     if (IOS) {
-      scrollSpeed > 1
-        ? (nextIndex = dataIndex + 1)
-        : (nextIndex = dataIndex - 1);
+      if (scrollSpeed > 25 && isLegitIndex(dataIndex + 1, data.length)) {
+        scrollIndex = dataIndex + 1;
+        setDataIndex(scrollIndex);
+      } else if (
+        scrollSpeed < -10 &&
+        isLegitIndex(dataIndex - 1, data.length)
+      ) {
+        scrollIndex = dataIndex - 1;
+        setDataIndex(scrollIndex);
+      }
     } else {
-      scrollSpeed < 1
-        ? (nextIndex = dataIndex + 1)
-        : (nextIndex = dataIndex - 1);
+      if (scrollSpeed < -25 && isLegitIndex(dataIndex + 1, data.length)) {
+        scrollIndex = dataIndex + 1;
+        setDataIndex(scrollIndex);
+      } else if (scrollSpeed > 10 && isLegitIndex(dataIndex - 1, data.length)) {
+        scrollIndex = dataIndex - 1;
+        setDataIndex(scrollIndex);
+      }
     }
+    console.log(scrollIndex);
 
-    if (isLegitIndex(nextIndex, data.length)) {
-      setDataIndex(nextIndex);
+    return scrollIndex;
+  };
+
+  const onScrollEndDrag = (e: NativeSyntheticEvent<NativeScrollEvent>) => {
+    console.log('scrollSpeed ', JSON.stringify(e.nativeEvent, null, 4));
+
+    const scrollIndex = calculateScrollDirectionIndex(
+      e!.nativeEvent!.velocity!.y,
+    );
+    if (scrollIndex) {
+      flatListRef.current.scrollToIndex({
+        index: scrollIndex,
+        animated: true,
+        viewPosition: 0,
+      });
     }
-
-    flatListRef.current.scrollToIndex({
-      index: dataIndex,
-      animated: true,
-      viewPosition: 0,
-    });
   };
 
   return (
@@ -118,15 +135,10 @@ const Paginator: React.FC<IPaginatorProps> = ({
         onScrollEndDrag={onScrollEndDrag}
         onViewableItemsChanged={onViewChangedRef.current}
         extraData={extraData}
+        snapToInterval={itemHeight}
         onScroll={onScrollCallback}
         decelerationRate={'fast'}
-        alwaysBounceVertical={false}
-        snapToInterval={itemHeight}
-        snapToAlignment={'center'}
-        bounces={false}
-        onLayout={e =>
-          console.log('onLayout', JSON.stringify(e.nativeEvent, null, 5))
-        }
+        removeClippedSubviews
       />
     </>
   );
