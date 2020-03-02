@@ -1,13 +1,14 @@
+import {useNavigation} from '@react-navigation/native';
 import React from 'react';
-import {View, FlatList, TouchableOpacity} from 'react-native';
-import SafeViewWrapper from '../../components/SafeViewWrapper';
-import {useNavigation} from 'react-navigation-hooks';
+import {FlatList, TouchableOpacity, View} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
-import Header from '../../components/Header';
-import VideoCard from '../../components/VideoPlayer/VideoCard';
 import {fetchVideo} from '../../api/fetchVideo';
+import Header from '../../components/Header';
+import SafeViewWrapper from '../../components/SafeViewWrapper';
+import VideoCard from '../../components/VideoPlayer/VideoCard';
+import {SearchStackProps} from '../../navigations/paramTypes/SearchParams';
 
-interface ISearchResultListProps {}
+interface ISearchResultListProps extends SearchStackProps<'Search'> {}
 
 const recentVideoTips = fetchVideo();
 
@@ -20,7 +21,10 @@ let videoList = recentVideoTips.map(v => ({
   url: v.url,
 }));
 
-const SearchResultList: React.FC<ISearchResultListProps> = () => {
+const SearchResultList: React.FC<ISearchResultListProps> = ({
+  navigation,
+  route,
+}) => {
   const {goBack /*getParam*/} = useNavigation();
 
   return (
@@ -30,6 +34,7 @@ const SearchResultList: React.FC<ISearchResultListProps> = () => {
           flexDirection: 'row',
           alignItems: 'center',
           paddingLeft: 25,
+          paddingTop: 20,
           marginBottom: 20,
         }}
       >
@@ -63,6 +68,8 @@ const SearchResultList: React.FC<ISearchResultListProps> = () => {
               height: 245,
             }}
             videoUrl={item.url}
+            navigation={navigation}
+            route={route}
           />
         )}
         keyExtractor={item => item.id as string}

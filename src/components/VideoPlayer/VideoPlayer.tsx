@@ -1,17 +1,17 @@
+import {useNavigation, useRoute} from '@react-navigation/native';
 import React from 'react';
 import {
-  View,
-  StyleSheet,
   Dimensions,
-  TouchableOpacity,
   StatusBar,
+  StyleSheet,
+  TouchableOpacity,
+  View,
 } from 'react-native';
-import Video, {OnLoadData, LoadError, OnSeekData} from 'react-native-video';
 import Icon from 'react-native-vector-icons/FontAwesome5';
-import VideoLoading from './VideoLoading';
+import Video, {LoadError, OnLoadData, OnSeekData} from 'react-native-video';
 import VideoControls from './VideoControls';
 import VideoInformation from './VideoInformation';
-import {useNavigation} from 'react-navigation-hooks';
+import VideoLoading from './VideoLoading';
 import VideoLogoHeader from './VideoLogoHeader';
 
 export interface IVideoPlayerProps {
@@ -36,11 +36,16 @@ const VideoPlayer: React.FC<IVideoPlayerProps> = ({
   const [isVideoLoaded, setIsVideoLoaded] = React.useState<boolean>(false);
   const [videoPause, setVideoPause] = React.useState<boolean>(true);
   const [videoEnd, setVideoEnd] = React.useState<boolean>(false);
-  const {getParam, goBack} = useNavigation();
+  const {goBack} = useNavigation();
+  const {params} = useRoute();
 
-  const videoUrl = getParam('videoUrl', url);
-  const addBackBtn = getParam('addBackBtn', backBtn);
-  const videoInfo = getParam('videoInfo', {viewsCount, title, proPicURL});
+  //@ts-ignore
+  const videoUrl = params?.videoUrl || url;
+  //@ts-ignore
+  const addBackBtn = params?.addBackBtn || backBtn;
+  //@ts-ignore
+  const videoInfo = params?.videoInfo || {viewsCount, title, proPicURL};
+
   const player = React.useRef<any>(null);
 
   const onBuffer = () => {

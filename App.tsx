@@ -1,13 +1,13 @@
 import React from 'react';
-import {YellowBox, Text} from 'react-native';
+import {Text, YellowBox} from 'react-native';
+import 'react-native-gesture-handler';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
-import {Provider} from 'react-redux';
-import {createStore, compose, applyMiddleware} from 'redux';
 import {enableScreens} from 'react-native-screens';
+import {Provider} from 'react-redux';
+import {applyMiddleware, compose, createStore} from 'redux';
 import {persistStore} from 'redux-persist';
 import {PersistGate} from 'redux-persist/lib/integration/react';
-
-import AppNavigationContainer from './src/Navigations';
+import AppNavigationContainer from './src/navigations';
 import rootReducer from './src/store/reducers';
 
 // This is for performance to enable react navigation

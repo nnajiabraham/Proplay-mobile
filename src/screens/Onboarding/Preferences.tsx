@@ -1,26 +1,26 @@
+import {useNavigation} from '@react-navigation/native';
 import React from 'react';
 import {
-  View,
-  StyleSheet,
-  Text,
-  ScrollView,
   Dimensions,
   Platform,
+  ScrollView,
   StatusBar,
+  StyleSheet,
+  Text,
   TouchableOpacity,
+  View,
 } from 'react-native';
-import {useNavigation} from 'react-navigation-hooks';
 import {useDispatch} from 'react-redux';
-
-import Header from '../../components/Header';
-import {Button} from '../../components/Button';
+import {OnboardingNavProps} from 'src/Navigations/paramTypes/OnboardingParams';
 import {SportCategories} from '../../api/fetchPreference';
-import SafeViewWrapper from '../../components/SafeViewWrapper';
+import {Button} from '../../components/Button';
+import Header from '../../components/Header';
 import PreferenceCategory from '../../components/PreferenceCategory';
+import SafeViewWrapper from '../../components/SafeViewWrapper';
 import {updatePreferenceAction} from '../../store/actions/preferences/actions';
 import {setFirstTimeUserAction} from '../../store/actions/userSettings/actions';
 
-const Preferences: React.FC = () => {
+const Preferences: React.FC<OnboardingNavProps<'Preference'>> = () => {
   const {navigate} = useNavigation();
   const dispatch = useDispatch();
 
@@ -36,14 +36,12 @@ const Preferences: React.FC = () => {
     (buttonKey: string) => () => {
       if (buttonKey == 'Next' && selectedPreferenceState.length) {
         dispatch(updatePreferenceAction(selectedPreferenceState));
-        dispatch(setFirstTimeUserAction(false));
         navigate('ProsToFollow');
       }
 
       if (buttonKey == 'Skip') {
         dispatch(updatePreferenceAction(selectedPreferenceState));
         dispatch(setFirstTimeUserAction(false));
-        navigate('Home');
       }
     },
     [dispatch, selectedPreferenceState],

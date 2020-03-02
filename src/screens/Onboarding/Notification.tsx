@@ -1,15 +1,17 @@
 import React from 'react';
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
-import SafeViewWrapper from '../../components/SafeViewWrapper';
-import Header from '../../components/Header';
-import {Button} from '../../components/Button';
-import {useNavigation} from 'react-navigation-hooks';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {requestNotifications} from 'react-native-permissions';
 import {useDispatch} from 'react-redux';
-import {setNotificationSettings} from '../../store/actions/userSettings/actions';
+import {OnboardingNavProps} from 'src/Navigations/paramTypes/OnboardingParams';
+import {Button} from '../../components/Button';
+import Header from '../../components/Header';
+import SafeViewWrapper from '../../components/SafeViewWrapper';
+import {
+  setFirstTimeUserAction,
+  setNotificationSettings,
+} from '../../store/actions/userSettings/actions';
 
-const Notification: React.FC = () => {
-  const {navigate} = useNavigation();
+const Notification: React.FC<OnboardingNavProps<'Notification'>> = () => {
   const dispatch = useDispatch();
 
   const actionButtonsHandler = React.useCallback(
@@ -17,12 +19,12 @@ const Notification: React.FC = () => {
       if (buttonKey == 'Allow Notifications') {
         requestNotifications(['alert', 'sound', 'badge']).then(({status}) => {
           dispatch(setNotificationSettings(status));
-          navigate('Home');
+          dispatch(setFirstTimeUserAction(false));
         });
       }
 
       if (buttonKey == 'Skip') {
-        navigate('Home');
+        dispatch(setFirstTimeUserAction(false));
       }
     },
     [dispatch],

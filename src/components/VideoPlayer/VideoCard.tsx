@@ -1,17 +1,17 @@
 import React from 'react';
 import {
-  View,
-  Text,
-  StyleSheet,
-  ImageBackground,
   Image,
-  TouchableOpacity,
+  ImageBackground,
   StyleProp,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
   ViewStyle,
 } from 'react-native';
-import {withNavigation, NavigationParams} from 'react-navigation';
+import {SearchStackProps} from '../../navigations/paramTypes/SearchParams';
 
-interface ITipsCard extends NavigationParams {
+interface ITipsCard extends SearchStackProps<'Search'> {
   thumbnailUrl: string;
   proPicURL: string;
   proName: string;
@@ -41,18 +41,20 @@ const VideoCard: React.FC<ITipsCard> = ({
         },
         viewStyle,
       ]}
-      onPress={() =>
+      onPress={() => {
+        console.log('navigation', navigation);
+
         videoUrl &&
-        navigation.push('VideoPlayer', {
-          videoUrl,
-          addBackBtn: true,
-          videoInfo: {
-            viewsCount: '23',
-            title: videoTitle,
-            proPicURL,
-          },
-        })
-      }
+          navigation!.push('VideoPlayer', {
+            videoUrl,
+            addBackBtn: true,
+            videoInfo: {
+              viewsCount: '23',
+              title: videoTitle,
+              proPicURL,
+            },
+          });
+      }}
     >
       <ImageBackground
         source={{
@@ -121,4 +123,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withNavigation(VideoCard);
+export default VideoCard;

@@ -1,13 +1,13 @@
 import React from 'react';
-import {Text, ScrollView, View, TouchableOpacity} from 'react-native';
-import SafeViewWrapper from '../../components/SafeViewWrapper';
-import Header from '../../components/Header';
-import ToggleSelectButton from '../../components/ToggleSelectButton';
-import {fetchSearchList} from '../../api/searchFetch';
-import SearchBar from '../../components/SearchBar';
-import {RecentTipCarousel} from '../../components/RecentTip';
+import {ScrollView, Text, TouchableOpacity, View} from 'react-native';
+import {SearchStackProps} from 'src/navigations/paramTypes/SearchParams';
 import {fetchVideo} from '../../api/fetchVideo';
-import {} from 'react-navigation';
+import {fetchSearchList} from '../../api/searchFetch';
+import Header from '../../components/Header';
+import {RecentTipCarousel} from '../../components/RecentTip';
+import SafeViewWrapper from '../../components/SafeViewWrapper';
+import SearchBar from '../../components/SearchBar';
+import ToggleSelectButton from '../../components/ToggleSelectButton';
 // import {ISportSubCategory} from '../../api/fetchPreference';
 // import {useNavigation} from 'react-navigation-hooks';
 
@@ -19,7 +19,7 @@ import {} from 'react-navigation';
 //   };
 // }
 
-const Search = ({navigation}: any) => {
+const Search = ({navigation, route}: SearchStackProps<'Search'>) => {
   const sportList = fetchSearchList();
   const recentVideoTips = fetchVideo();
   // const {navigate} = useNavigation();
@@ -48,7 +48,7 @@ const Search = ({navigation}: any) => {
         <SearchBar
           onSearch={searchString => {
             console.log(searchString);
-            navigation.push('SearchResultList');
+            navigation!.push('SearchResultList');
           }}
         />
         <View
@@ -73,7 +73,7 @@ const Search = ({navigation}: any) => {
           />
           <TouchableOpacity
             style={{marginRight: 20}}
-            onPress={() => navigation.push('SearchResultList')}
+            onPress={() => navigation!.push('SearchResultList')}
           >
             <Text
               style={{
@@ -86,7 +86,11 @@ const Search = ({navigation}: any) => {
             </Text>
           </TouchableOpacity>
         </View>
-        <RecentTipCarousel recentVideoTips={recentVideoTips} />
+        <RecentTipCarousel
+          recentVideoTips={recentVideoTips}
+          navigation={navigation}
+          route={route}
+        />
         <View
           style={{
             marginTop: 40,
@@ -115,7 +119,7 @@ const Search = ({navigation}: any) => {
                 disableSelectColor
                 onSelect={select => {
                   if (select) {
-                    navigation.push('SearchCategory', {
+                    navigation!.push('SearchCategory', {
                       header: sport.sportName,
                       data: {
                         categories: sport.positions,

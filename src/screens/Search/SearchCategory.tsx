@@ -1,27 +1,31 @@
+import {useNavigation, useRoute} from '@react-navigation/native';
 import React from 'react';
-import {Text, ScrollView, View, TouchableOpacity} from 'react-native';
-import SafeViewWrapper from '../../components/SafeViewWrapper';
-import Header from '../../components/Header';
-import ToggleSelectButton from '../../components/ToggleSelectButton';
-import SearchBar from '../../components/SearchBar';
-import {RecentTipCarousel} from '../../components/RecentTip';
-import {fetchVideo} from '../../api/fetchVideo';
+import {ScrollView, Text, TouchableOpacity, View} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
-import {useNavigation} from 'react-navigation-hooks';
 import {ISportSubCategory} from '../../api/fetchPreference';
+import {fetchVideo} from '../../api/fetchVideo';
+import Header from '../../components/Header';
+import {RecentTipCarousel} from '../../components/RecentTip';
+import SafeViewWrapper from '../../components/SafeViewWrapper';
+import SearchBar from '../../components/SearchBar';
+import ToggleSelectButton from '../../components/ToggleSelectButton';
 
 interface ITry {
   categories: Array<ISportSubCategory>;
   subCategories: Array<string>;
 }
 
-const SearchCategory = ({navigation}: any) => {
+const SearchCategory = ({navigation, route}: any) => {
   const recentVideoTips = fetchVideo();
-  const {goBack, getParam} = useNavigation();
+  const {goBack} = useNavigation();
+  const {params} = useRoute();
 
-  const header = getParam('header');
-  const subHeader = getParam('subHeader');
-  const data: ITry = getParam('data');
+  //@ts-ignore
+  const header = params?.header;
+  //@ts-ignore
+  const subHeader = params?.subHeader;
+  //@ts-ignore
+  const data: ITry = params?.data;
 
   return (
     <SafeViewWrapper removeNotch>
@@ -42,7 +46,12 @@ const SearchCategory = ({navigation}: any) => {
             marginBottom: 16,
           }}
         >
-          <TouchableOpacity style={{marginRight: 20}} onPress={() => goBack()}>
+          <TouchableOpacity
+            style={{
+              marginRight: 20,
+            }}
+            onPress={() => goBack()}
+          >
             <Icon name="chevron-left" color={'rgba(0,0,0,0.8)'} size={20} />
           </TouchableOpacity>
           <Header
@@ -81,7 +90,9 @@ const SearchCategory = ({navigation}: any) => {
             }}
           />
           <TouchableOpacity
-            style={{marginRight: 20}}
+            style={{
+              marginRight: 20,
+            }}
             onPress={() => navigation.push('SearchResultList')}
           >
             <Text
@@ -95,7 +106,11 @@ const SearchCategory = ({navigation}: any) => {
             </Text>
           </TouchableOpacity>
         </View>
-        <RecentTipCarousel recentVideoTips={recentVideoTips} />
+        <RecentTipCarousel
+          recentVideoTips={recentVideoTips}
+          navigation={navigation}
+          route={route}
+        />
         <View
           style={{
             marginTop: 40,

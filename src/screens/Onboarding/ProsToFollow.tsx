@@ -1,22 +1,23 @@
+import {useNavigation} from '@react-navigation/native';
 import React from 'react';
 import {
-  View,
-  Text,
-  ScrollView,
-  TouchableOpacity,
-  StyleSheet,
-  Platform,
-  StatusBar,
   Dimensions,
+  Platform,
+  ScrollView,
+  StatusBar,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
 } from 'react-native';
-import SafeViewWrapper from '../../components/SafeViewWrapper';
-import Header from '../../components/Header';
-import {Button} from '../../components/Button';
+import {OnboardingNavProps} from 'src/Navigations/paramTypes/OnboardingParams';
 import {ProSuggestionList} from '../../api/prosToFollow';
+import {Button} from '../../components/Button';
+import Header from '../../components/Header';
 import {ProToFollowCard} from '../../components/ProToFollowCard';
-import {useNavigation} from 'react-navigation-hooks';
+import SafeViewWrapper from '../../components/SafeViewWrapper';
 
-const ProsToFollow = () => {
+const ProsToFollow: React.FC<OnboardingNavProps<'ProsToFollow'>> = () => {
   const {navigate} = useNavigation();
 
   const [followedPro, setFollowedPro] = React.useState<Array<string>>([]);

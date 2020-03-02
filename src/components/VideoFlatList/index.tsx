@@ -1,8 +1,8 @@
+import {useIsFocused} from '@react-navigation/native';
 import React from 'react';
-import {StyleSheet, Dimensions, View} from 'react-native';
-import VideoPlayer from '../VideoPlayer';
+import {Dimensions, StyleSheet, View} from 'react-native';
 import {fetchVideo, IVideoFetchResponse} from '../../api/fetchVideo';
-import {useFocusState} from 'react-navigation-hooks';
+import VideoPlayer from '../VideoPlayer';
 import Paginator from './Paginator';
 
 const VideoFlatList: React.FC = () => {
@@ -10,7 +10,7 @@ const VideoFlatList: React.FC = () => {
     [],
   );
   const [currentVideoIndex, setCurrentVideoIndex] = React.useState(0);
-  const {isFocused} = useFocusState();
+  const isFocused = useIsFocused();
 
   React.useEffect(() => {
     setVideoList(fetchVideo());
